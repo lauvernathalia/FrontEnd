@@ -25,61 +25,6 @@
     <nav class="sidebar-menu">
       <a class="menu-item active">
         <div class="menu-main">
-          <span class="icon-circle"><i class="fas fa-th-large"></i></span>
-          <span class="menu-label">Dashboard</span>
-        </div>
-      </a>
-
-      <a class="menu-item" (click)="toggleSubmenu('operacao')">
-        <div class="menu-main">
-          <span class="icon-circle"><i class="far fa-calendar-check"></i></span>
-          <span class="menu-label">Operação diária</span>
-        </div>
-        <span class="menu-chevron">
-          <i class="fas" [ngClass]="menus.operacao ? 'fa-chevron-up' : 'fa-chevron-down'"></i>
-        </span>
-      </a>
-      <div class="submenu" *ngIf="menus.operacao && !isSidebarCollapsed">
-        <a class="submenu-item">Todas</a>
-        <a class="submenu-item">Nova solicitação</a>
-        <a class="submenu-item">Sugestão de melhoria</a>
-      </div>
-
-      <a class="menu-item" (click)="toggleSubmenu('solicitacoes')">
-        <div class="menu-main">
-          <span class="icon-circle"><i class="far fa-comment-dots"></i></span>
-          <span class="menu-label">Solicitações</span>
-        </div>
-        <span class="menu-chevron">
-          <i class="fas" [ngClass]="menus.solicitacoes ? 'fa-chevron-up' : 'fa-chevron-down'"></i>
-        </span>
-      </a>
-      <div class="submenu" *ngIf="menus.solicitacoes && !isSidebarCollapsed">
-        <a class="submenu-item">Todas</a>
-        <a class="submenu-item">Nova solicitação</a>
-        <a class="submenu-item">Sugestão de melhoria</a>
-      </div>
-
-      <a class="menu-item" (click)="toggleSubmenu('cadastros')">
-        <div class="menu-main">
-          <span class="icon-circle"><i class="far fa-folder-open"></i></span>
-          <span class="menu-label">Cadastros</span>
-        </div>
-        <span class="menu-chevron">
-          <i class="fas" [ngClass]="menus.cadastros ? 'fa-chevron-up' : 'fa-chevron-down'"></i>
-        </span>
-      </a>
-      <div class="submenu" *ngIf="menus.cadastros && !isSidebarCollapsed">
-        <a class="submenu-item">Marketplaces</a>
-        <a class="submenu-item">Representantes</a>
-        <a class="submenu-item">Estabelecimentos</a>
-        <a class="submenu-item">Bandeiras</a>
-        <a class="submenu-item">Planos</a>
-        <a class="submenu-item">Planos referência</a>
-      </div>
-
-      <a class="menu-item">
-        <div class="menu-main">
           <span class="icon-circle"><i class="far fa-id-badge"></i></span>
           <span class="menu-label">Minha conta</span>
         </div>
@@ -618,7 +563,26 @@
                 <div class="channel-bar-bg"><div class="channel-bar channel-bar-dark" style="width:65%"></div></div>
               </div>
             </article>
+            
+            <!-- Vendas por bandeiras (inserido aqui to keep alignment) -->
+            <article class="dash-card bandeiras-section" style="grid-column:1 / -1">
+              <h3 class="dash-card-title">Vendas por bandeiras</h3>
+              <div class="bandeiras-body" #bandeirasContainer>
+                <article class="bandeira-card" *ngFor="let b of bandeiras; let i = index">
+                  <div class="bandeira-logo"><img [src]="'assets/bandeiras/' + b + '.svg'" [alt]="b"></div>
+                  <div class="bandeira-nome">{{ (b | titlecase) }} (R$)</div>
+                  <div class="bandeira-valor">1.540.000,00</div>
+                  <div class="bandeira-variacao up">↑ 9.20%</div>
+                  <button class="btn-light">Ver transações</button>
+                </article>
+              </div>
+              <div class="bandeiras-pagination">
+                <button *ngFor="let p of pages; let i = index" class="bandeira-dot" (click)="scrollToPage(i)" [class.active]="activePage===i" aria-label="Ir para página {{i+1}}"></button>
+              </div>
+            </article>
           </div>
+
+          
 
         </div>
       </section>

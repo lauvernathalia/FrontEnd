@@ -916,7 +916,7 @@
 /* ensure child cards stretch to full height of the subrow */
 .sales-subrow {
   align-items: stretch;
-  width: 92%;
+  width: 100%;
 }
 
 .dash-card { align-self: stretch; }
@@ -1244,30 +1244,42 @@
   display: flex;
   gap: 12px;
   overflow-x: auto;
-  padding-bottom: 4px;
+  padding: 12px 6px 6px 6px;
+  align-items: stretch;
+  -webkit-overflow-scrolling: touch;
+  scroll-snap-type: x mandatory;
 }
 .bandeira-card {
-  min-width: 180px;
-  border-radius: 16px;
-  border: 1px solid #e3edf5;
-  padding: 10px 12px;
+  /* default fixed width for smaller viewports */
+  flex: 0 0 220px;
+  width: 220px;
+  min-height: 220px;
+  border-radius: 12px;
+  border: 1px solid #e9f0f6;
+  padding: 12px;
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  justify-content: space-between;
+  gap: 6px;
+  scroll-snap-align: start;
 }
 .bandeira-logo {
-  width: 32px;
-  height: 32px;
-  border-radius: 12px;
-  background: #fff6e1;
+  width: 48px;
+  height: 48px;
+  border-radius: 10px;
+ 
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
+.bandeira-logo img { width: 36px; height: 36px; display:block; }
 .bandeira-nome {
   font-size: 12px;
   color: #607d8b;
 }
 .bandeira-valor {
   font-size: 18px;
-  font-weight: 600;
+  font-weight: 700;
   color: #263238;
 }
 .bandeira-variacao {
@@ -1276,7 +1288,7 @@
 .btn-light {
   margin-top: 4px;
   align-self: flex-start;
-  padding: 6px 14px;
+  padding: 6px 12px;
   border-radius: 999px;
   border: none;
   background: #36d968;
@@ -1284,6 +1296,105 @@
   font-size: 12px;
   cursor: pointer;
 }
+
+/* Bandeiras section wrapper and pagination */
+.bandeiras-section {
+  margin-top: 18px;
+  padding: 12px 8px;
+  border-radius: 10px;
+  background: #ffffff;
+  border: 1px solid rgba(34,49,63,0.03);
+}
+.bandeiras-section .dash-card-title {
+  margin: 0 0 10px 8px;
+  font-size: 14px;
+  color: #263238;
+}
+.bandeira-card {
+  background: #fff;
+  box-shadow: 0 1px 0 rgba(34,49,63,0.02);
+}
+.bandeira-logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  color: #2d7d4f;
+}
+.bandeiras-pagination {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  align-items: center;
+  margin-top: 8px;
+}
+.bandeira-dot {
+  width: 8px;
+  height: 8px;
+  background: #dfe6ea;
+  border-radius: 50%;
+  display: inline-block;
+  transition: all 180ms ease;
+  border: none;
+}
+.bandeira-dot:focus {
+  outline: none;
+  box-shadow: 0 0 0 4px rgba(45,125,79,0.12);
+}
+.bandeira-dot.active {
+  background: #36d968;
+  width: 34px;
+  height: 8px;
+  border-radius: 999px;
+  box-shadow: 0 6px 18px rgba(18,87,53,0.12);
+}
+
+/* hide native horizontal scrollbar but preserve scrolling behavior */
+.bandeiras-body {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+.bandeiras-body::-webkit-scrollbar { height: 0; }
+.bandeiras-body::-webkit-scrollbar-thumb { background: transparent; }
+
+/* make container match visual proportions next to Mix TPV/Canais */
+.bandeiras-section {
+  padding: 18px;
+  min-height: 240px; /* match Mix TPV / Channels */
+}
+.bandeira-valor { font-size: 20px; font-weight: 700; color: #263238; }
+.bandeira-variacao.up { color: #2d7d4f; font-size: 12px; }
+
+/* if viewport too small, allow cards to wrap into rows (mobile) */
+@media (max-width: 900px) {
+  .bandeira-card { flex: 0 0 calc((100% - 2 * 12px) / 3); }
+}
+@media (max-width: 600px) {
+  .bandeira-card { flex: 0 0 calc((100% - 1 * 12px) / 2); }
+}
+.bandeira-valor { font-size: 18px; font-weight: 700; color: #263238; }
+.bandeira-variacao.up { color: #2d7d4f; font-size: 12px; }
+
+/* On wide screens show exactly 6 cards fitting the container */
+@media (min-width: 1100px) {
+  .bandeiras-body {
+    gap: 12px;
+  }
+  .bandeira-card {
+    flex: 0 0 calc((100% - (5 * 12px)) / 6);
+    width: auto;
+    min-height: 200px;
+    padding: 12px;
+  }
+  .bandeira-logo { width:44px; height:44px; }
+  .bandeira-logo img { width:32px; height:32px; 
+  border-radius: 12px;
+  border: 1px solid #e9f0f6;
+
+  }
+}
+.bandeira-valor { font-size: 20px; font-weight: 700; color: #263238; }
+.bandeira-variacao.up { color: #2d7d4f; font-size: 12px; }
 
 /* Cards KPIs principais (topo) */
 .kpi-top-grid {

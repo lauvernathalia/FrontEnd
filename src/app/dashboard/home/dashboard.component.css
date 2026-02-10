@@ -796,25 +796,37 @@
 /* Vendas por bandeiras */
 .bandeiras-body {
   display: flex;
-  gap: 12px;
+  gap: 18px;
   overflow-x: auto;
-  padding-bottom: 4px;
+  padding: 12px 6px 6px 6px;
+  align-items: stretch;
+  -webkit-overflow-scrolling: touch;
+  scroll-snap-type: x mandatory;
 }
 .bandeira-card {
-  min-width: 180px;
-  border-radius: 16px;
-  border: 1px solid #e3edf5;
-  padding: 10px 12px;
+  /* fixed width so several cards are visible and horizontal scroll is enabled */
+  flex: 0 0 220px;
+  width: 220px;
+  min-height: 240px;
+  border-radius: 12px;
+  border: 1px solid #e9f0f6;
+  padding: 14px;
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  justify-content: space-between;
+  gap: 8px;
+  scroll-snap-align: start;
 }
 .bandeira-logo {
-  width: 32px;
-  height: 32px;
+  width: 56px;
+  height: 56px;
   border-radius: 12px;
   background: #fff6e1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
+.bandeira-logo img { width: 40px; height: 40px; display:block; }
 .bandeira-nome {
   font-size: 12px;
   color: #607d8b;
@@ -838,6 +850,71 @@
   font-size: 12px;
   cursor: pointer;
 }
+
+/* Bandeiras section wrapper and pagination */
+.bandeiras-section {
+  margin-top: 18px;
+  padding: 12px 8px;
+  border-radius: 10px;
+  background: #ffffff;
+  border: 1px solid rgba(34,49,63,0.03);
+}
+.bandeiras-section .dash-card-title {
+  margin: 0 0 10px 8px;
+  font-size: 14px;
+  color: #263238;
+}
+.bandeira-card {
+  background: #fff;
+  box-shadow: 0 1px 0 rgba(34,49,63,0.02);
+}
+.bandeira-logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  color: #2d7d4f;
+}
+.bandeiras-pagination {
+  display: flex;
+  gap: 6px;
+  justify-content: center;
+  margin-top: 8px;
+}
+.bandeira-dot {
+  width: 8px;
+  height: 4px;
+  background: #e6eef3;
+  border-radius: 999px;
+  display: inline-block;
+}
+.bandeira-dot.active {
+  background: #2d7d4f;
+  width: 24px;
+}
+
+/* hide horizontal scrollbar but keep scroll behavior */
+.bandeiras-body::-webkit-scrollbar { height: 6px; }
+.bandeiras-body { -ms-overflow-style: -ms-autohiding-scrollbar; scrollbar-width: thin; }
+.bandeiras-body::-webkit-scrollbar-thumb { background: rgba(45,125,79,0.12); border-radius: 999px; }
+
+/* make container match visual proportions next to Mix TPV/Canais */
+.bandeiras-section {
+  padding: 18px;
+  min-height: 240px; /* match Mix TPV / Channels */
+}
+.bandeira-valor { font-size: 20px; font-weight: 700; color: #263238; }
+.bandeira-variacao.up { color: #2d7d4f; font-size: 12px; }
+
+/* if viewport too small, allow cards to wrap into rows (mobile) */
+@media (max-width: 900px) {
+  .bandeira-card { flex: 0 0 calc((100% - 2 * 12px) / 3); }
+}
+@media (max-width: 600px) {
+  .bandeira-card { flex: 0 0 calc((100% - 1 * 12px) / 2); }
+}
+.bandeira-valor { font-size: 20px; font-weight: 700; color: #263238; }
+.bandeira-variacao.up { color: #2d7d4f; font-size: 12px; }
 
 /* Cards KPIs principais (topo) */
 .kpi-top-grid {

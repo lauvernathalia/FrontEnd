@@ -1,4 +1,4 @@
-import { Component, AfterViewInit, OnDestroy } from '@angular/core';
+import { Component, AfterViewInit, OnDestroy, ElementRef, ViewChild } from '@angular/core';
 
 @Component({
   selector: 'app-dashboard',
@@ -34,9 +34,9 @@ isCollapsed = false;
     this.isCollapsed = !this.isCollapsed;
   }
   menus = {
-    operacao: true,
-    solicitacoes: true,
-    cadastros: true
+    operacao: false,
+    solicitacoes: false,
+    cadastros: false
   };
 
   toggleSidebar(): void {
@@ -46,6 +46,22 @@ isCollapsed = false;
   toggleSubmenu(menu: 'operacao' | 'solicitacoes' | 'cadastros'): void {
     this.menus[menu] = !this.menus[menu];
   }
+
+  // Bandeiras pagination state
+    bandeiras = [
+      'mastercard','visa','elo','banescard','hipercard','amex',
+      'mastercard','visa','elo','banescard','hipercard','amex',
+      'mastercard','visa','elo','banescard','hipercard','amex',
+      'mastercard','visa','elo','banescard','hipercard','amex',
+      'mastercard','visa','elo','banescard'
+    ];
+    // pagination by pages (each page shows N cards)
+    cardsPerPage = 6;
+    activeBandeira = 0; // index of single card if needed
+    activePage = 0; // currently visible page (dot)
+    @ViewChild('bandeirasContainer', { static: false }) bandeirasContainer!: ElementRef<HTMLDivElement>;
+
+  private _bandeirasScrollHandler = () => this._onBandeirasScroll();
   
   ngAfterViewInit(): void {
     // render inicial: preenche os paths SVG usando as arrays abaixo
@@ -53,10 +69,66 @@ isCollapsed = false;
     // atualiza no resize para manter as coordenadas corretas quando o
     // tamanho do gráfico mudar
     window.addEventListener('resize', this._resizeHandler);
+    // attach bandeiras scroll listener if container exists
+    setTimeout(() => {
+      const el = this.bandeirasContainer?.nativeElement;
+      if (el) {
+        el.addEventListener('scroll', this._bandeirasScrollHandler, { passive: true });
+      }
+    }, 20);
   }
 
   ngOnDestroy(): void {
     window.removeEventListener('resize', this._resizeHandler);
+    const el = this.bandeirasContainer?.nativeElement;
+    if (el) el.removeEventListener('scroll', this._bandeirasScrollHandler);
+  }
+
+  /** Scrolls the bandeiras container to the given index (smooth) */
+  scrollToBandeira(index: number) {
+    const el = this.bandeirasContainer?.nativeElement;
+    if (!el) return;
+    const card = el.querySelector('.bandeira-card') as HTMLElement;
+    const gap = 12; // match CSS gap
+    if (!card) return;
+    const step = card.getBoundingClientRect().width + gap;
+    const left = Math.round(index * step);
+    el.scrollTo({ left, behavior: 'smooth' });
+    this.activeBandeira = index;
+  }
+
+  /** Scrolls to the given page (page = group of cardsPerPage) */
+  scrollToPage(pageIndex: number) {
+    const el = this.bandeirasContainer?.nativeElement;
+    if (!el) return;
+    const card = el.querySelector('.bandeira-card') as HTMLElement;
+    const gap = 12;
+    if (!card) return;
+    const step = card.getBoundingClientRect().width + gap;
+    const pageStep = step * this.cardsPerPage;
+    const left = Math.round(pageIndex * pageStep);
+    el.scrollTo({ left, behavior: 'smooth' });
+    this.activePage = pageIndex;
+  }
+
+  private _onBandeirasScroll() {
+    const el = this.bandeirasContainer?.nativeElement;
+    if (!el) return;
+    const card = el.querySelector('.bandeira-card') as HTMLElement;
+    const gap = 12;
+    if (!card) return;
+    const step = card.getBoundingClientRect().width + gap;
+    const pageStep = step * this.cardsPerPage;
+    const pageIdx = Math.round(el.scrollLeft / pageStep);
+    this.activePage = Math.max(0, Math.min(Math.ceil(this.bandeiras.length / this.cardsPerPage) - 1, pageIdx));
+    // also keep single-card index roughly (optional)
+    const singleIdx = Math.round(el.scrollLeft / step);
+    this.activeBandeira = Math.max(0, Math.min(this.bandeiras.length - 1, singleIdx));
+  }
+
+  /** Helper getter used by template to render pages */
+  get pages() {
+    return Array.from({ length: Math.ceil(this.bandeiras.length / this.cardsPerPage) });
   }
 
   private _resizeHandler = () => { this.updateSalesSvg(); };
