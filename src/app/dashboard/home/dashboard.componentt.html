@@ -1,0 +1,442 @@
+<div class="dashboard-page">
+  <header class="app-header">
+    <div class="app-header-left">
+      <button (click)="toggleSidebar()" class="app-icon-circle"><i class="fas fa-arrow-left"></i></button>
+      <div class="app-logo-mark">LB</div>
+      <div class="app-logo-text">LEGACYBANK</div>
+    </div>  
+    <div class="app-header-right">
+      <button class="app-header-icon"><i class="fas fa-border-all"></i></button>
+      <button class="app-header-icon"><i class="far fa-bell"></i><span class="badge-dot"></span></button>
+      <button class="app-header-icon" ><i class="fas fa-sliders-h"></i></button>
+      <button class="app-login-btn">Login <i class="far fa-user"></i></button>
+    </div>
+  </header>
+
+  <div class="dashboard-layout" [class.sidebar-collapsed]="isSidebarCollapsed">
+  <aside class="sidebar">
+    <div class="sidebar-header">
+      <div class="sidebar-logo-icon">
+        <i class="fas fa-columns"></i>
+      </div>
+      <div class="sidebar-logo-text">LegacyBank</div>
+    </div>
+
+    <nav class="sidebar-menu">
+      <a class="menu-item active">
+        <div class="menu-main">
+          <span class="icon-circle"><i class="fas fa-th-large"></i></span>
+          <span class="menu-label">Dashboard</span>
+        </div>
+      </a>
+
+      <a class="menu-item" (click)="toggleSubmenu('operacao')">
+        <div class="menu-main">
+          <span class="icon-circle"><i class="far fa-calendar-check"></i></span>
+          <span class="menu-label">Operação diária</span>
+        </div>
+        <span class="menu-chevron">
+          <i class="fas" [ngClass]="menus.operacao ? 'fa-chevron-up' : 'fa-chevron-down'"></i>
+        </span>
+      </a>
+      <div class="submenu" *ngIf="menus.operacao && !isSidebarCollapsed">
+        <a class="submenu-item">Todas</a>
+        <a class="submenu-item">Nova solicitação</a>
+        <a class="submenu-item">Sugestão de melhoria</a>
+      </div>
+
+      <a class="menu-item" (click)="toggleSubmenu('solicitacoes')">
+        <div class="menu-main">
+          <span class="icon-circle"><i class="far fa-comment-dots"></i></span>
+          <span class="menu-label">Solicitações</span>
+        </div>
+        <span class="menu-chevron">
+          <i class="fas" [ngClass]="menus.solicitacoes ? 'fa-chevron-up' : 'fa-chevron-down'"></i>
+        </span>
+      </a>
+      <div class="submenu" *ngIf="menus.solicitacoes && !isSidebarCollapsed">
+        <a class="submenu-item">Todas</a>
+        <a class="submenu-item">Nova solicitação</a>
+        <a class="submenu-item">Sugestão de melhoria</a>
+      </div>
+
+      <a class="menu-item" (click)="toggleSubmenu('cadastros')">
+        <div class="menu-main">
+          <span class="icon-circle"><i class="far fa-folder-open"></i></span>
+          <span class="menu-label">Cadastros</span>
+        </div>
+        <span class="menu-chevron">
+          <i class="fas" [ngClass]="menus.cadastros ? 'fa-chevron-up' : 'fa-chevron-down'"></i>
+        </span>
+      </a>
+      <div class="submenu" *ngIf="menus.cadastros && !isSidebarCollapsed">
+        <a class="submenu-item">Marketplaces</a>
+        <a class="submenu-item">Representantes</a>
+        <a class="submenu-item">Estabelecimentos</a>
+        <a class="submenu-item">Bandeiras</a>
+        <a class="submenu-item">Planos</a>
+        <a class="submenu-item">Planos referência</a>
+      </div>
+
+      <a class="menu-item">
+        <div class="menu-main">
+          <span class="icon-circle"><i class="far fa-id-badge"></i></span>
+          <span class="menu-label">Minha conta</span>
+        </div>
+        <span class="menu-chevron"><i class="fas fa-chevron-down"></i></span>
+      </a>
+
+      <a class="menu-item">
+        <div class="menu-main">
+          <span class="icon-circle"><i class="fas fa-briefcase"></i></span>
+          <span class="menu-label">Comercial</span>
+        </div>
+        <span class="menu-chevron"><i class="fas fa-chevron-down"></i></span>
+      </a>
+
+      <a class="menu-item">
+        <div class="menu-main">
+          <span class="icon-circle"><i class="fas fa-tools"></i></span>
+          <span class="menu-label">Equipamentos</span>
+        </div>
+        <span class="menu-chevron"><i class="fas fa-chevron-down"></i></span>
+      </a>
+
+      <a class="menu-item">
+        <div class="menu-main">
+          <span class="icon-circle"><i class="fas fa-shield-alt"></i></span>
+          <span class="menu-label">Compliance</span>
+        </div>
+        <span class="menu-chevron"><i class="fas fa-chevron-down"></i></span>
+      </a>
+
+      <a class="menu-item">
+        <div class="menu-main">
+          <span class="icon-circle"><i class="fas fa-user-tie"></i></span>
+          <span class="menu-label">Vendedor (Eu)</span>
+        </div>
+        <span class="menu-chevron"><i class="fas fa-chevron-down"></i></span>
+      </a>
+
+      <a class="menu-item">
+        <div class="menu-main">
+          <span class="icon-circle"><i class="far fa-chart-bar"></i></span>
+          <span class="menu-label">Relatórios</span>
+        </div>
+        <span class="menu-chevron"><i class="fas fa-chevron-down"></i></span>
+      </a>
+    </nav>
+  </aside>
+
+  <main class="main-content">
+    <nav class="app-tabs">
+      <button class="tab-link active">Adquirência</button>
+      <button class="tab-link">BAAS</button>
+      <button class="tab-link">APIS</button>
+      <button class="tab-link">Marketplaces/Revendas</button>
+      <button class="tab-link">Equipamentos</button>
+      <button class="tab-link">Serviços</button>
+    </nav>
+
+    <section class="resumo-header">
+      <h2>Resumo geral</h2>
+    </section>
+    <div class="resumo-data-row">
+      <div></div>
+      <div class="resumo-data">
+        <span>Hoje,</span>
+        <span class="data-valor">15 de Novembro de 2023</span>
+        <i class="fas fa-chevron-down"></i>
+      </div>
+    </div>
+
+    <section class="grid grid-resumo">
+      <article class="card card-meta">
+        <header class="card-header">
+          <h3>Estimativa da meta TPV</h3>
+        </header>
+        <div class="card-body meta-body">
+          <div class="meta-panel">
+            <div class="meta-legenda">
+              <span class="dot dot-light"></span><span>Meta (R$)</span>
+              <span class="dot dot-dark"></span><span>Realizada</span>
+              <span class="dot dot-mid"></span><span>Prevista</span>
+            </div>
+            <div class="meta-valores">
+              <span>5.000.567,80</span>
+              <span>10.000.567,80</span>
+            </div>
+            <div class="meta-bar">
+              <div class="meta-bar-fill"></div>
+            </div>
+          </div>
+          <div class="meta-acesso">
+            <div class="meta-acesso-header">
+              <span class="meta-acesso-titulo">Acesso rápido</span>
+              <button class="meta-acesso-add">Adicionar item <i class="fas fa-plus-circle"></i></button>
+            </div>
+            <div class="acesso-grid">
+              <div class="acesso-item">
+                <div class="acesso-icone"><i class="far fa-window-restore"></i></div>
+                <div class="acesso-texto">
+                  <div class="acesso-titulo">Marketplac...</div>
+                </div>
+              </div>
+              <div class="acesso-item">
+                <div class="acesso-icone"><i class="far fa-comment-dots"></i></div>
+                <div class="acesso-texto">
+                  <div class="acesso-titulo">Revendas</div>
+                </div>
+              </div>
+              <div class="acesso-item">
+                <div class="acesso-icone"><i class="far fa-building"></i></div>
+                <div class="acesso-texto">
+                  <div class="acesso-titulo">Estabelec...</div>
+                </div>
+              </div>
+              <div class="acesso-item">
+                <div class="acesso-icone"><i class="far fa-address-card"></i></div>
+                <div class="acesso-texto">
+                  <div class="acesso-titulo">Agentes</div>
+                </div>
+              </div>
+              <div class="acesso-item">
+                <div class="acesso-icone"><i class="far fa-file-alt"></i></div>
+                <div class="acesso-texto">
+                  <div class="acesso-titulo">Últ. Transa...</div>
+                </div>
+              </div>
+              <div class="acesso-item">
+                <div class="acesso-icone"><i class="fas fa-tools"></i></div>
+                <div class="acesso-texto">
+                  <div class="acesso-titulo">Equipamento</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <article class="card card-resumo card-resumo-saldos">
+          <header class="card-header">
+            <h3>Total saldos (R$$)</h3>
+          </header>
+          <div class="card-body card-body-resumo">
+            <div class="resumo-valores">
+              <div class="resumo-valor">995.540,00</div>
+              <div class="resumo-var up">↑ 5,20%</div>
+            </div>
+            <div class="resumo-acao">
+              <button class="btn-outline-small">Extrato <i class="fas fa-download"></i></button>
+            </div>
+          </div>
+        </article>
+
+        <article class="card card-resumo card-resumo-futuros">
+          <header class="card-header">
+            <h3>Total lançamentos futuros (R$)</h3>
+          </header>
+          <div class="card-body card-body-resumo">
+            <div class="resumo-valores">
+              <div class="resumo-valor">995.540,00</div>
+              <div class="resumo-var up">↑ 5,20%</div>
+            </div>
+            <div class="resumo-acao">
+              <button class="btn-outline-small">Extrato <i class="fas fa-download"></i></button>
+            </div>
+          </div>
+        </article>
+
+        <article class="card card-resumo card-resumo-transferencia">
+          <header class="card-header">
+            <h3>Total em transferência (R$)</h3>
+          </header>
+          <div class="card-body card-body-resumo">
+            <div class="resumo-valores">
+              <div class="resumo-valor">995.540,00</div>
+              <div class="resumo-var up">↑ 5,20%</div>
+            </div>
+            <div class="resumo-acao">
+              <button class="btn-outline-small">Extrato <i class="fas fa-download"></i></button>
+            </div>
+          </div>
+        </article>
+
+        <article class="card card-resumo card-resumo-alerta card-resumo-falhas">
+          <header class="card-header">
+            <h3>Vendas falhadas (R$)</h3>
+          </header>
+          <div class="card-body card-body-resumo">
+            <div class="resumo-valores">
+              <div class="resumo-valor">995.540,00</div>
+              <div class="resumo-var up">↑ 5,20%</div>
+            </div>
+            <div class="resumo-acao">
+              <button class="btn-light-small">Ver detalhes</button>
+            </div>
+          </div>
+        </article>
+
+        <article class="card card-solicitacoes">
+        <header class="card-header">
+          <h3>Solicitações</h3>
+        </header>
+        <div class="card-body solic-body">
+          <div class="solic-item">
+            <div class="solic-label">
+              <span class="solic-icon"><i class="fas fa-circle"></i></span>
+              <span>ABERTAS</span>
+            </div>
+            <div class="solic-traco"></div>
+            <div class="solic-valor">27</div>
+          </div>
+          <div class="solic-item">
+            <div class="solic-label">
+              <span class="solic-icon"><i class="fas fa-circle"></i></span>
+              <span>PENDENTES</span>
+            </div>
+            <div class="solic-traco"></div>
+            <div class="solic-valor">12</div>
+          </div>
+          <div class="solic-item">
+            <div class="solic-label">
+              <span class="solic-icon"><i class="fas fa-circle"></i></span>
+              <span>CONCLUÍDAS</span>
+            </div>
+            <div class="solic-traco"></div>
+            <div class="solic-valor">150</div>
+          </div>
+        </div>
+      </article>
+
+      <article class="card card-nps">
+        <header class="card-header">
+          <h3>Índice de satisfação dos clientes</h3>
+        </header>
+        <div class="card-body nps-body">
+          <div class="nps-list">
+            <div class="nps-item"><span class="dot nps-promotores"></span>Promotores</div>
+            <div class="nps-item"><span class="dot nps-neutros"></span>Neutros</div>
+            <div class="nps-item"><span class="dot nps-detratores"></span>Detratores</div>
+          </div>
+          <div class="nps-donut">
+            <div class="donut-outer nps-donut-outer"></div>
+            <div class="donut-inner nps-donut-inner">
+              <span>56</span>
+              <small>NPS</small>
+            </div>
+          </div>
+        </div>
+      </article>
+    </section>
+
+    <!-- KPIs principais (cards grandes) -->
+    <section class="grid grid-4 kpi-top-grid">
+      <article class="card kpi-card kpi-card-comissao">
+        <header class="card-header">
+          <h3>Comissão Total (R$)</h3>
+        </header>
+        <div class="card-body kpi-card-body">
+          <div class="kpi-valor">1.540.000,00</div>
+          <div class="kpi-footer">
+            <span class="up">↑ 80,20%</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="card kpi-card kpi-card-tpv">
+        <header class="card-header">
+          <h3>TPV Total (R$)</h3>
+          <button class="kpi-link">Ver detalhes <i class="fas fa-chevron-right"></i></button>
+        </header>
+        <div class="card-body kpi-card-body">
+          <div class="kpi-valor">50.000.000,00</div>
+          <div class="kpi-footer">
+            <span class="up">↑ 80,20%</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="card kpi-card kpi-card-vendas">
+        <header class="card-header">
+          <h3>Nº vendas</h3>
+        </header>
+        <div class="card-body kpi-card-body">
+          <div class="kpi-valor">200</div>
+          <div class="kpi-footer">
+            <span class="up">↑ 80,20%</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="card kpi-card kpi-card-ticket">
+        <header class="card-header">
+          <h3>Ticket médio (R$)</h3>
+        </header>
+        <div class="card-body kpi-card-body">
+          <div class="kpi-valor">540,00</div>
+          <div class="kpi-footer">
+            <span class="up">↑ 80,20%</span>
+          </div>
+        </div>
+      </article>
+    </section>
+
+    <!-- Análise de risco -->
+    <section class="analise-risco">
+      <div class="analise-header">
+        <h2>Análise de risco</h2>
+      </div>
+      <div class="grid grid-3 analise-grid">
+        <article class="card card-risco">
+          <header class="card-header card-risco-header">
+            <div class="card-risco-icon"><i class="fas fa-receipt"></i></div>
+            <h3>Vendas em duplicidade (R$)</h3>
+          </header>
+          <div class="card-body card-risco-body">
+            <div class="risco-valores">
+              <div class="risco-valor">995.540,00</div>
+              <div class="risco-var up">↑ 5,20%</div>
+            </div>
+            <div class="risco-acao">
+              <button class="btn-risco">Extrato <i class="fas fa-download"></i></button>
+            </div>
+          </div>
+        </article>
+
+        <article class="card card-risco">
+          <header class="card-header card-risco-header">
+            <div class="card-risco-icon"><i class="fas fa-exclamation-circle"></i></div>
+            <h3>Disputas (R$)</h3>
+          </header>
+          <div class="card-body card-risco-body">
+            <div class="risco-valores">
+              <div class="risco-valor">995.540,00</div>
+              <div class="risco-var up">↑ 5,20%</div>
+            </div>
+            <div class="risco-acao">
+              <button class="btn-risco">Extrato <i class="fas fa-download"></i></button>
+            </div>
+          </div>
+        </article>
+
+        <article class="card card-risco">
+          <header class="card-header card-risco-header">
+            <div class="card-risco-icon"><i class="fas fa-undo-alt"></i></div>
+            <h3>Charge Back (R$)</h3>
+          </header>
+          <div class="card-body card-risco-body">
+            <div class="risco-valores">
+              <div class="risco-valor">995.540,00</div>
+              <div class="risco-var up">↑ 5,20%</div>
+            </div>
+            <div class="risco-acao">
+              <button class="btn-risco">Extrato <i class="fas fa-download"></i></button>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+  </main>
+</div>
+</div>

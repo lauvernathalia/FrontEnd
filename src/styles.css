@@ -1,0 +1,86 @@
+a.navbar-brand {
+    white-space: normal;
+    text-align: center;
+    word-break: break-all;
+}
+
+.main-container {
+    padding-top: 25px;
+    padding-right: 15px;
+    padding-left: 15px;
+    padding-bottom: 100px;
+    margin-right: auto;
+    margin-left: auto;
+    overflow: hidden;
+}
+
+
+/* Sticky footer styles
+  -------------------------------------------------- */
+
+html {
+    font-size: 14px;
+}
+
+@media (min-width: 768px) {
+    html {
+        font-size: 16px;
+    }
+}
+
+.border-top {
+    border-top: 1px solid #e5e5e5;
+}
+
+.border-bottom {
+    border-bottom: 1px solid #e5e5e5;
+}
+
+.box-shadow {
+    box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
+}
+
+button.accept-policy {
+    font-size: 1rem;
+    line-height: inherit;
+}
+
+
+/* Sticky footer styles
+  -------------------------------------------------- */
+
+html {
+    position: relative;
+    min-height: 100%;
+}
+
+body {
+    margin: 0;
+}
+
+.footer {
+    width: 100%;
+    white-space: nowrap;
+    height: 60px;
+    line-height: 60px;
+}
+
+input,
+select,
+file,
+textarea {
+    max-width: 400px;
+}
+
+/* Hide global scrollbars while keeping scroll behavior */
+html, body {
+    height: 100%;
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none;    /* Firefox */
+}
+
+html::-webkit-scrollbar,
+body::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+}
