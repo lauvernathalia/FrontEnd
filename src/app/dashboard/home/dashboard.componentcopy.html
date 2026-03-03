@@ -23,53 +23,78 @@
     </div>
 
     <nav class="sidebar-menu">
-      <a class="menu-item active">
+      <a class="menu-item active" (click)="toggleSubmenu(0)">
         <div class="menu-main">
           <span class="icon-circle"><i class="far fa-id-badge"></i></span>
           <span class="menu-label">Minha conta</span>
         </div>
         <span class="menu-chevron"><i class="fas fa-chevron-down"></i></span>
       </a>
+      <div class="submenu" *ngIf="openedMenu === 0">
+        <a class="submenu-item">Perfil</a>
+        <a class="submenu-item">Configurações</a>
+        <a class="submenu-item">Sair</a>
+      </div>
 
-      <a class="menu-item">
+      <a class="menu-item" (click)="toggleSubmenu(1)">
         <div class="menu-main">
           <span class="icon-circle"><i class="fas fa-briefcase"></i></span>
           <span class="menu-label">Comercial</span>
         </div>
         <span class="menu-chevron"><i class="fas fa-chevron-down"></i></span>
       </a>
+      <div class="submenu" *ngIf="openedMenu === 1">
+        <a class="submenu-item">Vendas</a>
+        <a class="submenu-item">Contratos</a>
+      </div>
 
-      <a class="menu-item">
+      <a class="menu-item" (click)="toggleSubmenu(2)">
         <div class="menu-main">
           <span class="icon-circle"><i class="fas fa-tools"></i></span>
           <span class="menu-label">Equipamentos</span>
         </div>
         <span class="menu-chevron"><i class="fas fa-chevron-down"></i></span>
       </a>
+      <div class="submenu" *ngIf="openedMenu === 2">
+        <a class="submenu-item">Dispositivos</a>
+        <a class="submenu-item">Manutenção</a>
+      </div>
 
-      <a class="menu-item">
+      <a class="menu-item" (click)="toggleSubmenu(3)">
         <div class="menu-main">
           <span class="icon-circle"><i class="fas fa-shield-alt"></i></span>
           <span class="menu-label">Compliance</span>
         </div>
         <span class="menu-chevron"><i class="fas fa-chevron-down"></i></span>
       </a>
+      <div class="submenu" *ngIf="openedMenu === 3">
+        <a class="submenu-item">Políticas</a>
+        <a class="submenu-item">Auditorias</a>
+      </div>
 
-      <a class="menu-item">
+      <a class="menu-item" (click)="toggleSubmenu(4)">
         <div class="menu-main">
           <span class="icon-circle"><i class="fas fa-user-tie"></i></span>
           <span class="menu-label">Vendedor (Eu)</span>
         </div>
         <span class="menu-chevron"><i class="fas fa-chevron-down"></i></span>
       </a>
+      <div class="submenu" *ngIf="openedMenu === 4">
+        <a class="submenu-item">Minhas vendas</a>
+        <a class="submenu-item">Metas</a>
+      </div>
 
-      <a class="menu-item">
+      <a class="menu-item" (click)="toggleSubmenu(5)">
         <div class="menu-main">
           <span class="icon-circle"><i class="far fa-chart-bar"></i></span>
           <span class="menu-label">Relatórios</span>
         </div>
         <span class="menu-chevron"><i class="fas fa-chevron-down"></i></span>
       </a>
+      <div class="submenu" *ngIf="openedMenu === 5">
+        <a class="submenu-item">Vendas</a>
+        <a class="submenu-item">Comissões</a>
+      </div>
     </nav>
   </aside>
 

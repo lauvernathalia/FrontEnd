@@ -33,18 +33,15 @@ isCollapsed = false;
   toggleMenu() {
     this.isCollapsed = !this.isCollapsed;
   }
-  menus = {
-    operacao: false,
-    solicitacoes: false,
-    cadastros: false
-  };
+  // index of opened sidebar menu (null = none)
+  openedMenu: number | null = null;
 
   toggleSidebar(): void {
     this.isSidebarCollapsed = !this.isSidebarCollapsed;
   }
 
-  toggleSubmenu(menu: 'operacao' | 'solicitacoes' | 'cadastros'): void {
-    this.menus[menu] = !this.menus[menu];
+  toggleSubmenu(index: number): void {
+    this.openedMenu = this.openedMenu === index ? null : index;
   }
 
   // Bandeiras pagination state
