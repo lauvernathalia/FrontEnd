@@ -1,0 +1,74 @@
+<div class="login-dash">
+    <div class="row g-0">
+        <div class="col-md-6 left-panel d-flex align-items-center justify-content-center text-center">
+                <div class="brand">
+                <img src="assets/logo-legacybank.svg" alt="LegacyBank" class="brand-logo" />
+                <p class="version">Versão 2.0</p>
+            </div>
+        </div>
+
+        <div class="col-md-6 right-panel d-flex align-items-center justify-content-center">
+            <div class="card login-card p-4 w-75">
+                <div class="text-center mb-3">
+                    <h3>Seja bem-vindo(a)</h3>
+                    <p class="text-muted small">No seu app, leia o QR Code abaixo para liberar o acesso</p>
+                </div>
+
+                <div *ngIf="!showEmailLogin" class="qr-section text-center">
+                    <div class="qr-wrap mb-3">
+                        <img [src]="qrImageUrl" alt="QR Code" class="qr-image"/>
+                    </div>
+                    <div class="qr-timer text-muted mb-3">expira em {{ qrTimerDisplay }}</div>
+
+                    <div class="d-flex justify-content-center gap-3 mb-4">
+                        <button class="btn btn-success" (click)="toggleEmailLogin()">Entrar com email</button>
+                        <button class="btn btn-light border" (click)="createAccount()">Criar conta</button>
+                    </div>
+
+                    <div class="app-download text-center mt-4">
+                        <h5 class="mb-2">Baixe nosso app</h5>
+                        <p class="text-muted small">Faça o download do aplicativo e aproveite os recursos exclusivos</p>
+                        <div class="d-flex justify-content-center gap-2 mt-3">
+                            <button class="btn btn-outline-success">Google Play</button>
+                            <button class="btn btn-outline-success">App Store</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div *ngIf="showEmailLogin">
+                    <form novalidate (ngSubmit)="login()" [formGroup]="loginForm">
+                        <div class="mb-3" *ngIf="errors.length > 0">
+                            <div class="alert alert-danger">
+                                <h6>Opa! Alguma coisa não deu certo:</h6>
+                                <ul>
+                                    <li *ngFor="let error of errors">{{ error }}</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">E-mail</label>
+                            <input type="text" class="form-control" formControlName="email" [ngClass]="{'is-invalid': displayMessage.email }" />
+                            <div *ngIf="displayMessage.email" class="invalid-feedback d-block" [innerHTML]="displayMessage.email"></div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Senha</label>
+                            <input type="password" class="form-control" formControlName="password" [ngClass]="{'is-invalid': displayMessage.password }" />
+                            <div *ngIf="displayMessage.password" class="invalid-feedback d-block" [innerHTML]="displayMessage.password"></div>
+                        </div>
+
+                        <div class="d-flex justify-content-between align-items-center">
+                            <button class="btn btn-secondary" type="button" (click)="toggleEmailLogin()">Voltar</button>
+                            <button class="btn btn-success" type="submit" [disabled]="!loginForm.valid">Entrar</button>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="text-center mt-3">
+                    <small class="text-muted">Ou <a href="#" (click)="refreshQr(); $event.preventDefault();">regerar QR</a></small>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

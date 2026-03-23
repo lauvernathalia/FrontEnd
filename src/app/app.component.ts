@@ -13,7 +13,8 @@ export class AppComponent {
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
         const url = event.urlAfterRedirects || event.url;
-        this.exibirNavegacao = !url.startsWith('/dashboard');
+        const hiddenRoutes = ['/dashboard', '/conta/loginn'];
+        this.exibirNavegacao = !hiddenRoutes.some(r => url.startsWith(r));
       }
     });
   }

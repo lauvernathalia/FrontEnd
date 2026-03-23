@@ -6,8 +6,9 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { CadastroComponent } from './cadastro/cadastro.component';
 import { LoginComponent } from './login/login.component';
+import { LogindashComponent } from './login/logindash.component';
 import { ContaAppComponent } from './conta.app.component';
-
+import { DashboardAppComponent } from '../dashboard/dashboard.app.component';
 import { ContaRoutingModule } from './conta.route';
 import { ContaService } from './services/conta.service';
 
@@ -19,6 +20,7 @@ import { ContaGuard } from './services/conta.guard';
     ContaAppComponent,
     CadastroComponent, 
     LoginComponent
+    , LogindashComponent
   ],
   imports: [
     CommonModule,

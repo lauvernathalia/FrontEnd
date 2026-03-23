@@ -605,6 +605,109 @@
                 <button *ngFor="let p of pages; let i = index" class="bandeira-dot" (click)="scrollToPage(i)" [class.active]="activePage===i" aria-label="Ir para página {{i+1}}"></button>
               </div>
             </article>
+            <!-- Planos section inserted per design -->
+            <article class="dash-card planos-section" style="grid-column:1 / -1">
+              <h3 class="dash-card-title">Planos</h3>
+              <div class="planos-body">
+                <div class="plano-card">
+                  <div class="plano-info">
+                    <div class="plano-meta">Mais usado</div>
+                    <div class="plano-name">LB PAG LINK</div>
+                  </div>
+                  <div class="plano-connector" aria-hidden="true"></div>
+                  <span class="plano-badge up">▲ 28%</span>
+                </div>
+
+                <div class="plano-card">
+                  <div class="plano-info">
+                    <div class="plano-meta">Mais rentável</div>
+                    <div class="plano-name">LB PAG LINK</div>
+                  </div>
+                  <div class="plano-connector" aria-hidden="true"></div>
+                  <span class="plano-badge up">▲ 28%</span>
+                </div>
+
+                <div class="plano-card">
+                  <div class="plano-info">
+                    <div class="plano-meta">Menos usado</div>
+                    <div class="plano-name">LB PAG LINK</div>
+                  </div>
+                  <div class="plano-connector" aria-hidden="true"></div>
+                  <span class="plano-badge down">▼ 28%</span>
+                </div>
+
+                <div class="plano-card">
+                  <div class="plano-info">
+                    <div class="plano-meta">Menos rentável</div>
+                    <div class="plano-name">LB PAG LINK</div>
+                  </div>
+                  <div class="plano-connector" aria-hidden="true"></div>
+                  <span class="plano-badge down">▼ 28%</span>
+                </div>
+              </div>
+            </article>
+            
+            <!-- KPI cards (inseridos após Planos) -->
+            <article class="dash-card kpi-section" style="grid-column:1 / -1">
+              <div class="kpi-body">
+                <div class="kpi-card">
+                  <div class="kpi-top">
+                    <div class="kpi-icon">🏷️</div>
+                    <div class="kpi-label">Marketplaces</div>
+                    <div class="kpi-value">1.200</div>
+                  </div>
+                  <div class="kpi-foot">
+                    <div class="kpi-foot-box">
+                      <div class="kpi-change up">↑ 9.20%</div>
+                      <div class="kpi-foot-text">Último mês</div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="kpi-card">
+                  <div class="kpi-top">
+                    <div class="kpi-icon">👥</div>
+                    <div class="kpi-label">Representantes</div>
+                    <div class="kpi-value">200</div>
+                  </div>
+                  <div class="kpi-foot">
+                    <div class="kpi-foot-box">
+                      <div class="kpi-change up">↑ 9.20%</div>
+                      <div class="kpi-foot-text">Último mês</div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="kpi-card">
+                  <div class="kpi-top">
+                    <div class="kpi-icon">🏬</div>
+                    <div class="kpi-label">Estabelecimentos</div>
+                    <div class="kpi-value">1.540</div>
+                  </div>
+                  <div class="kpi-foot">
+                    <div class="kpi-foot-box">
+                      <div class="kpi-change mixed"><span class="green">↑ 20%</span> <span class="red">↓ 20%</span> <span class="plus">+ 20</span></div>
+                      <div class="kpi-foot-text">Últ. mês · Churn · Clientes</div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="kpi-card">
+                  <div class="kpi-top">
+                    <div class="kpi-icon">🧑‍💼</div>
+                    <div class="kpi-label">Agentes</div>
+                    <div class="kpi-value">540</div>
+                  </div>
+                  <div class="kpi-foot">
+                    <div class="kpi-foot-box">
+                      <div class="kpi-change up">↑ 20%</div>
+                      <div class="kpi-foot-text">Últ. mês · Clientes</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </article>
+
           </div>
 
           

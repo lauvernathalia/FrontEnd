@@ -7,7 +7,7 @@ import { AcessoNegadoComponent } from './navegacao/acesso-negado/acesso-negado.c
 
 
 const routes: Routes = [
-  { path: '', redirectTo: '/home', pathMatch: 'full' },
+  { path: '', redirectTo: '/conta/loginn', pathMatch: 'full' },
   { path: 'home', component: HomeComponent },
   {
     path: 'dashboard',
