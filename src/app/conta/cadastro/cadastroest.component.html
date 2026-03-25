@@ -1,0 +1,187 @@
+ 
+   <header class="app-header">
+    <div class="app-header-left">
+      <button (click)="toggleSidebar()" class="app-icon-circle"><i class="fas fa-arrow-left"></i></button>
+      <div class="app-logo-mark">LB</div>
+      <div class="app-logo-text">LEGACYBANK</div>
+    </div>  
+    <div class="app-header-right">
+      <button class="app-header-icon"><i class="fas fa-border-all"></i></button>
+      <button class="app-header-icon"><i class="far fa-bell"></i><span class="badge-dot"></span></button>
+      <button class="app-header-icon" ><i class="fas fa-sliders-h"></i></button>
+      <button class="app-login-btn">Login <i class="far fa-user"></i></button>
+    </div>
+  </header>
+  <div class="dashboard-layout" [class.sidebar-collapsed]="isSidebarCollapsed">
+  <aside class="sidebar">
+    <div class="sidebar-header">
+      <div class="sidebar-logo-icon">
+        <i class="fas fa-columns"></i>
+      </div>
+      <div class="sidebar-logo-text">LegacyBank</div>
+    </div>
+
+    <nav class="sidebar-menu">
+      <a class="menu-item active" (click)="toggleSubmenu(0)">
+        <div class="menu-main">
+          <span class="icon-circle"><i class="far fa-id-badge"></i></span>
+          <span class="menu-label">Minha conta</span>
+        </div>
+        <span class="menu-chevron"><i class="fas fa-chevron-down"></i></span>
+      </a>
+      <div class="submenu" *ngIf="openedMenu === 0">
+        <a class="submenu-item">Perfil</a>
+        <a class="submenu-item">Configurações</a>
+        <a class="submenu-item">Sair</a>
+      </div>
+
+      <a class="menu-item" (click)="toggleSubmenu(1)">
+        <div class="menu-main">
+          <span class="icon-circle"><i class="fas fa-briefcase"></i></span>
+          <span class="menu-label">Comercial</span>
+        </div>
+        <span class="menu-chevron"><i class="fas fa-chevron-down"></i></span>
+      </a>
+      <div class="submenu" *ngIf="openedMenu === 1">
+        <a class="submenu-item">Vendas</a>
+        <a class="submenu-item">Contratos</a>
+      </div>
+
+      <a class="menu-item" (click)="toggleSubmenu(2)">
+        <div class="menu-main">
+          <span class="icon-circle"><i class="fas fa-tools"></i></span>
+          <span class="menu-label">Equipamentos</span>
+        </div>
+        <span class="menu-chevron"><i class="fas fa-chevron-down"></i></span>
+      </a>
+      <div class="submenu" *ngIf="openedMenu === 2">
+        <a class="submenu-item">Dispositivos</a>
+        <a class="submenu-item">Manutenção</a>
+      </div>
+
+      <a class="menu-item" (click)="toggleSubmenu(3)">
+        <div class="menu-main">
+          <span class="icon-circle"><i class="fas fa-shield-alt"></i></span>
+          <span class="menu-label">Compliance</span>
+        </div>
+        <span class="menu-chevron"><i class="fas fa-chevron-down"></i></span>
+      </a>
+      <div class="submenu" *ngIf="openedMenu === 3">
+        <a class="submenu-item">Políticas</a>
+        <a class="submenu-item">Auditorias</a>
+      </div>
+
+      <a class="menu-item" (click)="toggleSubmenu(4)">
+        <div class="menu-main">
+          <span class="icon-circle"><i class="fas fa-user-tie"></i></span>
+          <span class="menu-label">Vendedor (Eu)</span>
+        </div>
+        <span class="menu-chevron"><i class="fas fa-chevron-down"></i></span>
+      </a>
+      <div class="submenu" *ngIf="openedMenu === 4">
+        <a class="submenu-item">Minhas vendas</a>
+        <a class="submenu-item">Metas</a>
+      </div>
+
+      <a class="menu-item" (click)="toggleSubmenu(5)">
+        <div class="menu-main">
+          <span class="icon-circle"><i class="far fa-chart-bar"></i></span>
+          <span class="menu-label">Relatórios</span>
+        </div>
+        <span class="menu-chevron"><i class="fas fa-chevron-down"></i></span>
+      </a>
+      <div class="submenu" *ngIf="openedMenu === 5">
+        <a class="submenu-item">Vendas</a>
+        <a class="submenu-item">Comissões</a>
+      </div>
+    </nav>
+  </aside>
+  <div class="page-container">
+  <div class="page-header">
+    <div class="page-header-left">
+      <nav class="breadcrumbs">&lt; Cadastros / <strong>Estabelecimentos</strong></nav>
+      <div class="page-title">
+        <h1>Estabelecimentos</h1>
+        <p class="page-subtitle">Habilitar e gerenciar estabelecimentos de banking e adquirência</p>
+      </div>
+    </div>
+    <div class="page-actions">
+     
+      <button class="btn btn-outline">Importar CNPJ/CPF</button>
+      <button class="btn btn-primary">Novo estabelecimento</button>
+    </div>
+  </div>
+
+  <section class="list-card">
+    <div class="table-controls">
+      <div class="controls-left">
+        <div class="filter-buttons">
+          <div class="search-box search-small">
+            <input placeholder="Buscar" />
+            <button class="search-btn"><i class="fas fa-search"></i></button>
+          </div>
+          <button class="btn btn-pill active">Ativos (50) <i class="fas fa-check-circle"></i></button>
+          <button class="btn btn-pill">Inativos (20)</button>
+          <button class="btn btn-pill">Novos (56)</button>
+          <button class="btn btn-pill">Físicas (100)</button>
+          <button class="btn btn-pill">Jurídicas (300)</button>
+        </div>
+      </div>
+      <div class="controls-right">
+        <button class="ctrl-link">Ordenação <i class="fas fa-chevron-down"></i></button>
+        <button class="ctrl-link">Exportar lista <i class="fas fa-download"></i></button>
+        <button class="ctrl-link">Filtrar <i class="fas fa-sliders-h"></i></button>
+      </div>
+    </div>
+
+    <table class="estabelecimentos-table">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>ESTABELECIMENTO</th>
+          <th>CADASTRO</th>
+          <th>STATUS</th>
+          <th>REPRESENTANTE</th>
+          <th>MODALIDADE</th>
+          <th>PORTAL</th>
+          <th>PAYOUT</th>
+          <th>PLATAFORMAS</th>
+          <th>ATALHOS</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let e of mocEstabelecimentos">
+          <td>{{ e.id }}</td>
+          <td>
+            <div class="est-name">{{ e.nome }}</div>
+            <div class="est-cnpj">{{ e.cnpj }}</div>
+          </td>
+          <td>{{ e.cadastro }}</td>
+          <td>
+            <span class="status-dot" [ngClass]="{
+              'status-ok': e.status === 'Habilitado',
+              'status-denied': e.status === 'Negado',
+              'status-pending': e.status === 'Em análise'
+            }"></span>
+            <span class="status-text">{{ e.status }}</span>
+          </td>
+          <td>
+            <div class="rep-name">{{ e.representante }}</div>
+            <div class="rep-cnpj">{{ e.cnpj }}</div>
+          </td>
+          <td>{{ e.modalidade }}</td>
+          <td class="icon-cell"> <i class="fas" [ngClass]="e.portal ? 'fa-check-circle ok' : 'fa-times-circle na'"></i> </td>
+          <td class="icon-cell"> <i class="fas" [ngClass]="e.payout ? 'fa-check-circle ok' : 'fa-times-circle na'"></i> </td>
+          <td>
+            <div class="platforms">
+              <span class="plat" *ngFor="let p of e.plataformas">{{ p }}</span>
+            </div>
+          </td>
+          <td class="short"> <i class="fas fa-ellipsis-v"></i> </td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+</div>
+ </div>

@@ -28,7 +28,7 @@ export class ContaService extends BaseService {
 
     login(usuario: Usuario): Observable<Usuario> {
         let response = this.http
-            .post(this.UrlServiceV1 + 'entrar', usuario, this.ObterHeaderJson())
+            .post(this.UrlServiceV1 + 'auth/entrar', usuario, this.ObterHeaderJson())
             .pipe(
                 tap(() => this.spinner.show()),
                 map(this.extractData),

@@ -1,6 +1,7 @@
 import { Injectable, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { CadastroComponent } from '../cadastro/cadastro.component';
+import { CadastroestComponent } from '../cadastro/cadastroest.component';
 import { LocalStorageUtils } from 'src/app/utils/localstorage';
 
 
@@ -11,15 +12,16 @@ export class ContaGuard  {
 
     private router = inject(Router);
     
-    canDeactivate(component: CadastroComponent) {
+    canDeactivate(component: CadastroComponent | CadastroestComponent) {
         if(component.mudancasNaoSalvas) {
-            return window.confirm('Tem certeza que deseja abandonar o preenchimento do formulario?');
+            return window.confirm('Tem certeza que deseja abandonar o preenchimento do formulario ?');
         }  
 
         return true
     }
 
     canActivate() {
+        let tk = this.localStorageUtils.obterTokenUsuario();
         if(this.localStorageUtils.obterTokenUsuario()){
             this.router.navigate(['/home']);
         }

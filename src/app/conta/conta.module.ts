@@ -14,11 +14,13 @@ import { ContaService } from './services/conta.service';
 
 import { NarikCustomValidatorsModule } from '@narik/custom-validators';
 import { ContaGuard } from './services/conta.guard';
+import { CadastroestComponent } from './cadastro/cadastroest.component';
 
 @NgModule({
   declarations: [
     ContaAppComponent,
     CadastroComponent, 
+    CadastroestComponent,
     LoginComponent
     , LogindashComponent
   ],

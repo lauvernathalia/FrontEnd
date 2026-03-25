@@ -55,7 +55,7 @@ export class LoginComponent extends FormBaseComponent implements OnInit {
 
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, CustomValidators.rangeLength([6, 15])]]
+      password: ['', [Validators.required, CustomValidators.rangeLength([2, 15])]]
     });
   }
 
