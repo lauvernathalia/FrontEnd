@@ -1,4 +1,3 @@
- 
    <header class="app-header">
     <div class="app-header-left">
       <button (click)="toggleSidebar()" class="app-icon-circle"><i class="fas fa-arrow-left"></i></button>
@@ -96,92 +95,98 @@
       </div>
     </nav>
   </aside>
-  <div class="page-container">
-  <div class="page-header">
-    <div class="page-header-left">
-      <nav class="breadcrumbs">&lt; Cadastros / <strong>Estabelecimentos</strong></nav>
-      <div class="page-title">
-        <h1>Estabelecimentos</h1>
-        <p class="page-subtitle">Habilitar e gerenciar estabelecimentos de banking e adquirência</p>
+ <main class="main-content">
+    <div class="container">
+      <div class="page-header">
+        <a class="back-link" [routerLink]="['/conta/cadastroest']">← Cadastros / Estabelecimentos / Editar estabelecimento</a>
+        <h1>Adicionar novo estabelecimento</h1>
       </div>
-    </div>
-    <div class="page-actions">
-     
-      <button class="btn btn-outline">Importar CNPJ/CPF</button>
-      <button class="btn btn-primary" [routerLink]="['/conta/cadastronovo']">Novo estabelecimento</button>
-    </div>
-  </div>
 
-  <section class="list-card">
-    <div class="table-controls">
-      <div class="controls-left">
-        <div class="filter-buttons">
-          <div class="search-box search-small">
-            <input placeholder="Buscar" />
-            <button class="search-btn"><i class="fas fa-search"></i></button>
-          </div>
-          <button class="btn btn-pill active">Ativos (50) <i class="fas fa-check-circle"></i></button>
-          <button class="btn btn-pill">Inativos (20)</button>
-          <button class="btn btn-pill">Novos (56)</button>
-          <button class="btn btn-pill">Físicas (100)</button>
-          <button class="btn btn-pill">Jurídicas (300)</button>
-        </div>
+      <div class="steps-wrapper">
+        <ul class="steps">
+          <li *ngFor="let label of ['Dados parceiro','Responsável','Documentação','Informações comerciais','Contato','Endereço']; let i = index"
+              (click)="setActiveTab(i+1)"
+              [class.active]="activeTab === (i+1)">
+            <div class="step-num">{{i+1}}</div>
+            <div class="step-text">{{i+1}}. {{label}}</div>
+          </li>
+        </ul>
       </div>
-      <div class="controls-right">
-        <button class="ctrl-link">Ordenação <i class="fas fa-chevron-down"></i></button>
-        <button class="ctrl-link">Exportar lista <i class="fas fa-download"></i></button>
-        <button class="ctrl-link">Filtrar <i class="fas fa-sliders-h"></i></button>
-      </div>
-    </div>
 
-    <table class="estabelecimentos-table">
-      <thead>
-        <tr>
-          <th>ID</th>
-          <th>ESTABELECIMENTO</th>
-          <th>CADASTRO</th>
-          <th>STATUS</th>
-          <th>REPRESENTANTE</th>
-          <th>MODALIDADE</th>
-          <th>PORTAL</th>
-          <th>PAYOUT</th>
-          <th>PLATAFORMAS</th>
-          <th>ATALHOS</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let e of mocEstabelecimentos">
-          <td>{{ e.id }}</td>
-          <td>
-            <div class="est-name">{{ e.nome }}</div>
-            <div class="est-cnpj">{{ e.cnpj }}</div>
-          </td>
-          <td>{{ e.cadastro }}</td>
-          <td>
-            <span class="status-dot" [ngClass]="{
-              'status-ok': e.status === 'Habilitado',
-              'status-denied': e.status === 'Negado',
-              'status-pending': e.status === 'Em análise'
-            }"></span>
-            <span class="status-text">{{ e.status }}</span>
-          </td>
-          <td>
-            <div class="rep-name">{{ e.representante }}</div>
-            <div class="rep-cnpj">{{ e.cnpj }}</div>
-          </td>
-          <td>{{ e.modalidade }}</td>
-          <td class="icon-cell"> <i class="fas" [ngClass]="e.portal ? 'fa-check-circle ok' : 'fa-times-circle na'"></i> </td>
-          <td class="icon-cell"> <i class="fas" [ngClass]="e.payout ? 'fa-check-circle ok' : 'fa-times-circle na'"></i> </td>
-          <td>
-            <div class="platforms">
-              <span class="plat" *ngFor="let p of e.plataformas">{{ p }}</span>
+      <form [formGroup]="cadastroForm" (ngSubmit)="adicionarConta()">
+        <div class="tab-content">
+          <div *ngIf="activeTab === 1">
+            <div class="resumo-header"><h2>Dados do parceiro</h2></div>
+            <label class="form-label">Tipo de documento</label>
+            <div class="document-cards">
+              <div class="doc-card" [class.selected]="cadastroForm.get('documentType')?.value === 'cpf'" (click)="cadastroForm.get('documentType')?.setValue('cpf')">
+                <div class="card-inner">
+                  <div class="icon"><i class="far fa-user"></i></div>
+                  <div class="meta"><div class="title">CPF</div></div>
+                </div>
+                <div class="radio-indicator"></div>
+              </div>
+
+              <div class="doc-card" [class.selected]="cadastroForm.get('documentType')?.value === 'cnpj'" (click)="cadastroForm.get('documentType')?.setValue('cnpj')">
+                <div class="card-inner">
+                  <div class="icon"><i class="fas fa-home"></i></div>
+                  <div class="meta"><div class="title">CNPJ</div></div>
+                </div>
+                <div class="radio-indicator"></div>
+              </div>
             </div>
-          </td>
-          <td class="short"> <i class="fas fa-ellipsis-v"></i> </td>
-        </tr>
-      </tbody>
-    </table>
-  </section>
+
+            <div style="margin-top:18px; max-width:520px;">
+              <label class="form-label">CNPJ*</label>
+              <input class="form-control" placeholder="Informe o CNPJ da Pessoa Jurídica" formControlName="cnpj">
+            </div>
+
+            <div style="margin-top:12px; max-width:520px;">
+              <label class="form-label">Razão Social</label>
+              <input class="form-control" placeholder="Digite a razão social" formControlName="razaoSocial">
+            </div>
+
+            <div style="margin-top:22px;">
+              <button type="button" class="resumo-btn" (click)="nextTab()">Salvar e continuar →</button>
+            </div>
+          </div>
+
+          <div *ngIf="activeTab === 2">
+            <h3>Responsável</h3>
+            <p>Conteúdo da aba Responsável (exemplo).</p>
+            <div style="margin-top:12px;">
+              <button type="button" class="resumo-btn" (click)="prevTab()">← Voltar</button>
+              <button type="button" class="resumo-btn" style="margin-left:8px" (click)="nextTab()">Salvar e continuar →</button>
+            </div>
+          </div>
+
+          <div *ngIf="activeTab === 3">
+            <h3>Documentação</h3>
+            <p>Conteúdo da aba Documentação.</p>
+          </div>
+
+          <div *ngIf="activeTab === 4">
+            <h3>Informações comerciais</h3>
+          </div>
+
+          <div *ngIf="activeTab === 5">
+            <h3>Contato</h3>
+          </div>
+
+          <div *ngIf="activeTab === 6">
+            <h3>Endereço</h3>
+            <div style="margin-top:18px;">
+              <button type="button" class="resumo-btn" (click)="prevTab()">← Voltar</button>
+              <button type="submit" class="resumo-btn" style="margin-left:8px">Finalizar</button>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </main>
+ 
+  
 
 </div>
-
+ 
+  

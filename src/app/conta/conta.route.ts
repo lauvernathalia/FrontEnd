@@ -7,6 +7,7 @@ import { ContaGuard } from './services/conta.guard';
 import { LogindashComponent } from './login/logindash.component';
 import { DashboardComponent } from '../dashboard/home/dashboard.component';
 import { CadastroestComponent } from './cadastro/cadastroest.component';
+import { CadastroNovoComponent } from './cadastro/Novo/cadastroNovo.component';
 
 const contaRouterConfig: Routes = [
     {
@@ -16,7 +17,8 @@ const contaRouterConfig: Routes = [
             { path: 'login', component: LoginComponent, canActivate: [ContaGuard] },
               { path: 'loginn', component: LogindashComponent, canActivate: [ContaGuard] },
               { path: 'Dashboard', component: DashboardComponent, canActivate: [ContaGuard] },
-                  { path: 'cadastroest', component: CadastroestComponent}
+                  { path: 'cadastroest', component: CadastroestComponent},
+                  { path: 'cadastronovo', component: CadastroNovoComponent}
         ]
     }
 ];

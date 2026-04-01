@@ -13,7 +13,7 @@ export class AppComponent {
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
         const url = event.urlAfterRedirects || event.url;
-        const hiddenRoutes = ['/dashboard', '/conta/loginn'];
+        const hiddenRoutes = ['/dashboard', '/conta/loginn', '/conta/cadastronovo'];
         this.exibirNavegacao = !hiddenRoutes.some(r => url.startsWith(r));
       }
     });
