@@ -16,7 +16,7 @@ const contaRouterConfig: Routes = [
             { path: 'login', component: LoginComponent, canActivate: [ContaGuard] },
               { path: 'loginn', component: LogindashComponent, canActivate: [ContaGuard] },
               { path: 'Dashboard', component: DashboardComponent, canActivate: [ContaGuard] },
-                  { path: 'cadastroest', component: CadastroestComponent,}
+                  { path: 'cadastroest', component: CadastroestComponent}
         ]
     }
 ];
