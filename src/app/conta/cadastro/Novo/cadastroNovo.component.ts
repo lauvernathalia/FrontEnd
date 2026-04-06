@@ -225,6 +225,38 @@ isCollapsed = false;
     if (ctrl) ctrl.setValue(masked, { emitEvent: false });
   }
 
+  // Drag & drop / file selector helpers for upload boxes
+  dragOver: string | null = null;
+  uploadedFiles: { [key: string]: File | null } = {};
+
+  triggerFileSelect(key: string) {
+    const el = document.getElementById('file-' + key) as HTMLInputElement | null;
+    if (el) el.click();
+  }
+
+  onFileSelected(event: any, key: string) {
+    const file = event?.target?.files ? event.target.files[0] : null;
+    if (file) {
+      this.uploadedFiles[key] = file;
+    }
+  }
+
+  onDragOver(event: any, key: string) {
+    event.preventDefault();
+    this.dragOver = key;
+  }
+
+  onDragLeave(event: any, key: string) {
+    this.dragOver = null;
+  }
+
+  onDrop(event: any, key: string) {
+    event.preventDefault();
+    this.dragOver = null;
+    const file = event?.dataTransfer?.files ? event.dataTransfer.files[0] : null;
+    if (file) this.uploadedFiles[key] = file;
+  }
+
   processarSucesso(response: any) {
     this.cadastroForm.reset();
     this.errors = [];

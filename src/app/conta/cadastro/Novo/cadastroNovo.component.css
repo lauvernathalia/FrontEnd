@@ -819,17 +819,31 @@ input.form-control:focus, textarea.form-control:focus {
 /* Identification document upload boxes */
 .id-doc-section { margin-top: 12px; max-width: 640px; }
 .id-doc-section .upload-grid { display: flex; gap: 18px; align-items: stretch; flex-wrap: wrap; justify-content: flex-start; }
-.id-doc-section .upload-box { width: 45%; max-width: 500px; min-width: 260px; border: 2px dashed rgba(54,167,107,0.45); border-radius: 8px; padding: 18px; background: rgba(233,248,238,0.6); text-align: center; position: relative; box-sizing: border-box; margin: 0; }
-.id-doc-section .upload-box .upload-icon { font-size: 22px; color: #36a76b; margin-bottom: 8px; }
-.id-doc-section .upload-box .upload-title { font-weight: 700; color: #2D7D4F; margin-bottom: 8px; }
+.id-doc-section .upload-box { width: 45%; max-width: 500px; min-width: 260px; border: 2px dashed #36a76b; border-radius: 12px; padding: 22px; background: #e9f8ee; text-align: center; position: relative; box-sizing: border-box; margin: 0; cursor: pointer; display:flex; flex-direction:column; align-items:center; justify-content:center; min-height:140px; }
+.id-doc-section .upload-box .upload-icon { font-size: 28px; color: #36a76b; margin-bottom: 10px; }
+.id-doc-section .upload-box .upload-title { font-weight: 700; color: #2D7D4F; margin-bottom: 6px; font-size: 15px; }
 .id-doc-section .upload-box .upload-instruction { color: #607d8b; margin-bottom: 6px; }
 .id-doc-section .upload-box .upload-instruction a { color: #36a76b; text-decoration: underline; }
 .id-doc-section .upload-box .upload-meta { color: #90a4ae; font-size: 12px; margin-top: 8px; }
-.id-doc-section .upload-box .upload-input { position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0; cursor: pointer; border-radius: 8px; }
+.id-doc-section .upload-box .upload-input { display:none !important; }
 
 @media (max-width: 800px) {
   .id-doc-section .upload-box { flex: 1 1 100%; }
 }
+
+/* Styles specific to the Documentação tab stacked upload boxes */
+.upload-grid-vertical { display: flex; flex-direction: column; gap: 20px; }
+.upload-box.vertical { width: 100%; max-width: 640px; min-width: 0; margin: 0; display:flex; flex-direction:column; align-items:center; justify-content:center; min-height:140px; border: 2px dashed #36a76b; border-radius: 12px; padding: 22px; background: #e9f8ee; }
+.upload-box.vertical .upload-icon { font-size: 28px; margin-bottom: 10px; color:#36a76b }
+.upload-box.vertical .upload-title { font-weight:700; margin-bottom:6px; color:#2D7D4F; font-size:15px }
+.upload-box.vertical .upload-instruction { color:#607d8b }
+.upload-box.vertical .upload-meta { color:#90a4ae; font-size:12px; margin-top:8px }
+.doc-section { max-width: 640px; }
+/* hide native input consistently */
+.upload-input { display: none !important; }
+
+/* dragover visual state */
+.upload-box.dragover { border-color: #2D7D4F; background: rgba(217,246,224,0.9); box-shadow: 0 4px 12px rgba(45,125,79,0.06) inset; }
 
 
 .grid {

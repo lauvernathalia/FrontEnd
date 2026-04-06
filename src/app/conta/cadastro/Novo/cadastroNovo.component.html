@@ -167,20 +167,20 @@
             <div class="id-doc-section">
               <label class="form-label">Documento de identificação*</label>
               <div class="upload-grid">
-                <div class="upload-box">
+                <div class="upload-box" (click)="triggerFileSelect('rg-frente')" [class.dragover]="dragOver === 'rg-frente'" (dragover)="$event.preventDefault(); onDragOver($event,'rg-frente')" (dragleave)="onDragLeave($event,'rg-frente')" (drop)="onDrop($event,'rg-frente')">
                   <div class="upload-icon"><i class="fas fa-cloud-upload-alt"></i></div>
                   <div class="upload-title">RG/CNH (Frente)</div>
-                  <div class="upload-instruction">Arraste aqui o arquivo ou <a href="#">clique aqui</a>.</div>
+                  <div class="upload-instruction">Arraste aqui o arquivo ou <a href="#" (click)="$event.preventDefault(); triggerFileSelect('rg-frente')">clique aqui</a>.</div>
                   <div class="upload-meta">Tipo de arquivo: .PDF ou .DOC | Tamanho max: 15mb</div>
-                  <input type="file" class="upload-input" accept=".pdf,.doc">
+                  <input id="file-rg-frente" type="file" class="upload-input" accept=".pdf,.doc" (change)="onFileSelected($event,'rg-frente')" style="display:none">
                 </div>
 
-                <div class="upload-box">
+                <div class="upload-box" (click)="triggerFileSelect('rg-verso')" [class.dragover]="dragOver === 'rg-verso'" (dragover)="$event.preventDefault(); onDragOver($event,'rg-verso')" (dragleave)="onDragLeave($event,'rg-verso')" (drop)="onDrop($event,'rg-verso')">
                   <div class="upload-icon"><i class="fas fa-cloud-upload-alt"></i></div>
                   <div class="upload-title">RG/CNH (Verso)</div>
-                  <div class="upload-instruction">Arraste aqui o arquivo ou <a href="#">clique aqui</a>.</div>
+                  <div class="upload-instruction">Arraste aqui o arquivo ou <a href="#" (click)="$event.preventDefault(); triggerFileSelect('rg-verso')">clique aqui</a>.</div>
                   <div class="upload-meta">Tipo de arquivo: .PDF ou .DOC | Tamanho max: 15mb</div>
-                  <input type="file" class="upload-input" accept=".pdf,.doc">
+                  <input id="file-rg-verso" type="file" class="upload-input" accept=".pdf,.doc" (change)="onFileSelected($event,'rg-verso')" style="display:none">
                 </div>
               </div>
             </div>
@@ -192,8 +192,38 @@
           </div>
 
           <div *ngIf="activeTab === 3">
-            <h3>Documentação</h3>
-            <p>Conteúdo da aba Documentação.</p>
+            <div class="resumo-header"><h2>Documentação</h2></div>
+
+            <div class="doc-section">
+              <label class="form-label">Anexar comprovante CNPJ/CPF*</label>
+              <div class="upload-grid-vertical">
+                <div class="upload-box vertical" (click)="triggerFileSelect('cnpjcpf')" [class.dragover]="dragOver === 'cnpjcpf'" (dragover)="$event.preventDefault(); onDragOver($event,'cnpjcpf')" (dragleave)="onDragLeave($event,'cnpjcpf')" (drop)="onDrop($event,'cnpjcpf')">
+                  <div class="upload-icon"><i class="fas fa-cloud-upload-alt"></i></div>
+                  <div class="upload-title">Comprovante CNPJ/CPF</div>
+                  <div class="upload-instruction">Arraste aqui o arquivo ou <a href="#" (click)="$event.preventDefault(); triggerFileSelect('cnpjcpf')">clique aqui</a>.</div>
+                  <div class="upload-meta">Tipo de arquivo: .PDF ou .DOC | Tamanho max: 15mb</div>
+                  <input id="file-cnpjcpf" type="file" class="upload-input" accept=".pdf,.doc" (change)="onFileSelected($event,'cnpjcpf')" style="display:none">
+                </div>
+              </div>
+            </div>
+
+            <div class="doc-section" style="margin-top:18px;">
+              <label class="form-label">Comprovante de atividade*</label>
+              <div class="upload-grid-vertical">
+                <div class="upload-box vertical" (click)="triggerFileSelect('atividade')" [class.dragover]="dragOver === 'atividade'" (dragover)="$event.preventDefault(); onDragOver($event,'atividade')" (dragleave)="onDragLeave($event,'atividade')" (drop)="onDrop($event,'atividade')">
+                  <div class="upload-icon"><i class="fas fa-cloud-upload-alt"></i></div>
+                  <div class="upload-title">Comprovante de atividade</div>
+                  <div class="upload-instruction">Arraste aqui o arquivo ou <a href="#" (click)="$event.preventDefault(); triggerFileSelect('atividade')">clique aqui</a>.</div>
+                  <div class="upload-meta">Tipo de arquivo: .PDF ou .DOC | Tamanho max: 15mb</div>
+                  <input id="file-atividade" type="file" class="upload-input" accept=".pdf,.doc" (change)="onFileSelected($event,'atividade')" style="display:none">
+                </div>
+              </div>
+            </div>
+
+            <div style="margin-top:12px;">
+              <button type="button" class="resumo-btn" (click)="prevTab()">← Voltar</button>
+              <button type="button" class="resumo-btn" style="margin-left:8px" (click)="nextTab()">Salvar e continuar →</button>
+            </div>
           </div>
 
           <div *ngIf="activeTab === 4">
