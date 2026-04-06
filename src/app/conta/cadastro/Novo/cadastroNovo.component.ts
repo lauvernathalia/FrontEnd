@@ -22,6 +22,8 @@ export class CadastroNovoComponent extends FormBaseComponent implements OnInit, 
    isSidebarCollapsed = false;
 isCollapsed = false;
 
+ licenciadoForm: UntypedFormGroup;
+
   toggleMenu() {
     this.isCollapsed = !this.isCollapsed;
   }
@@ -205,6 +207,12 @@ isCollapsed = false;
         );
 
       this.mudancasNaoSalvas = false;
+    }
+
+
+    if (1==1) {
+    console.log("testenathalia")
+    var teste=this.cadastroForm;
     }
   }
 

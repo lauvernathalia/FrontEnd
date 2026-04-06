@@ -500,6 +500,37 @@ input.form-control:focus, textarea.form-control:focus {
   color: #e3f6ec;
 }
 
+/* Input with right-side icon (used by Inscrição estadual select-like input) */
+.input-with-icon {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+}
+.input-with-icon .form-control {
+  padding-right: 42px; /* leave space for icon */
+}
+.input-with-icon .input-icon {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #e9f8ee; /* light green background like reference */
+  color: #36a76b; /* green chevron */
+  width: 28px;
+  height: 28px;
+  border-radius: 999px;
+  border: 1px solid rgba(54,167,107,0.12);
+  font-size: 12px;
+}
+
+/* Ensure form groups align left and keep vertical spacing consistent */
+.form-group { margin-bottom: 18px; text-align: left; }
+
+
 .tpv-progress-legenda {
   display: grid;
   grid-template-columns: auto auto auto auto auto auto;

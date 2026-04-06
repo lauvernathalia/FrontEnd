@@ -147,7 +147,7 @@
             </div>
 
             <div style="margin-top:22px;">
-              <button type="button" class="resumo-btn" (click)="nextTab()">Salvar e continuar →</button>
+              <button type="button" class="resumo-btn" type="submit" >Salvar e continuar →</button>
             </div>
           </div>
 
@@ -227,7 +227,30 @@
           </div>
 
           <div *ngIf="activeTab === 4">
-            <h3>Informações comerciais</h3>
+            <div class="resumo-header"><h2>Informações comerciais</h2></div>
+
+            <div class="form-group" style="max-width:640px;">
+              <label class="form-label">Inscrição estadual*</label>
+              <div class="input-with-icon" style="max-width:520px;">
+                <input class="form-control" placeholder="Digite o nome do responsável" formControlName="inscricaoEstadual">
+                <span class="input-icon"><i class="fas fa-chevron-down"></i></span>
+              </div>
+            </div>
+
+            <div class="form-group" style="max-width:640px;">
+              <label class="form-label">Data de abertura*</label>
+              <input class="form-control" placeholder="00/00/0000" formControlName="dataAbertura" maxlength="10" style="max-width:520px;">
+            </div>
+
+            <div class="form-group" style="max-width:640px;">
+              <label class="form-label">Ramo de teste*</label>
+              <input class="form-control" placeholder="Digite aqui" formControlName="ramoTeste" style="max-width:520px;">
+            </div>
+
+            <div style="margin-top:12px;">
+              <button type="button" class="resumo-btn" (click)="prevTab()">← Voltar</button>
+              <button type="button" class="resumo-btn" style="margin-left:8px" (click)="nextTab()">Salvar e continuar →</button>
+            </div>
           </div>
 
           <div *ngIf="activeTab === 5">
