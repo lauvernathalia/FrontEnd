@@ -816,6 +816,21 @@ input.form-control:focus, textarea.form-control:focus {
 /* CPF specific input sizing (keeps reasonably sized but responsive) */
 .form-group .cpf-input, input[formControlName="responsavelCpf"] { max-width: 320px; }
 
+/* Identification document upload boxes */
+.id-doc-section { margin-top: 12px; max-width: 640px; }
+.id-doc-section .upload-grid { display: flex; gap: 18px; align-items: stretch; flex-wrap: wrap; justify-content: flex-start; }
+.id-doc-section .upload-box { width: 45%; max-width: 500px; min-width: 260px; border: 2px dashed rgba(54,167,107,0.45); border-radius: 8px; padding: 18px; background: rgba(233,248,238,0.6); text-align: center; position: relative; box-sizing: border-box; margin: 0; }
+.id-doc-section .upload-box .upload-icon { font-size: 22px; color: #36a76b; margin-bottom: 8px; }
+.id-doc-section .upload-box .upload-title { font-weight: 700; color: #2D7D4F; margin-bottom: 8px; }
+.id-doc-section .upload-box .upload-instruction { color: #607d8b; margin-bottom: 6px; }
+.id-doc-section .upload-box .upload-instruction a { color: #36a76b; text-decoration: underline; }
+.id-doc-section .upload-box .upload-meta { color: #90a4ae; font-size: 12px; margin-top: 8px; }
+.id-doc-section .upload-box .upload-input { position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0; cursor: pointer; border-radius: 8px; }
+
+@media (max-width: 800px) {
+  .id-doc-section .upload-box { flex: 1 1 100%; }
+}
+
 
 .grid {
   display: grid;

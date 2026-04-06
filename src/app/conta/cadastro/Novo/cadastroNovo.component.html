@@ -164,6 +164,27 @@
               <input class="form-control" placeholder="000.000.000-00" maxlength="14" formControlName="responsavelCpf" (input)="onCpfInput($event)">
             </div>
 
+            <div class="id-doc-section">
+              <label class="form-label">Documento de identificação*</label>
+              <div class="upload-grid">
+                <div class="upload-box">
+                  <div class="upload-icon"><i class="fas fa-cloud-upload-alt"></i></div>
+                  <div class="upload-title">RG/CNH (Frente)</div>
+                  <div class="upload-instruction">Arraste aqui o arquivo ou <a href="#">clique aqui</a>.</div>
+                  <div class="upload-meta">Tipo de arquivo: .PDF ou .DOC | Tamanho max: 15mb</div>
+                  <input type="file" class="upload-input" accept=".pdf,.doc">
+                </div>
+
+                <div class="upload-box">
+                  <div class="upload-icon"><i class="fas fa-cloud-upload-alt"></i></div>
+                  <div class="upload-title">RG/CNH (Verso)</div>
+                  <div class="upload-instruction">Arraste aqui o arquivo ou <a href="#">clique aqui</a>.</div>
+                  <div class="upload-meta">Tipo de arquivo: .PDF ou .DOC | Tamanho max: 15mb</div>
+                  <input type="file" class="upload-input" accept=".pdf,.doc">
+                </div>
+              </div>
+            </div>
+
             <div style="margin-top:12px;">
               <button type="button" class="resumo-btn" (click)="prevTab()">← Voltar</button>
               <button type="button" class="resumo-btn" style="margin-left:8px" (click)="nextTab()">Salvar e continuar →</button>
