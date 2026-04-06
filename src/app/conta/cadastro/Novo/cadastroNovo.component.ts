@@ -208,6 +208,23 @@ isCollapsed = false;
     }
   }
 
+  onCpfInput(event: Event) {
+    const input = event.target as HTMLInputElement;
+    if (!input) return;
+    let val = input.value.replace(/\D/g, '').slice(0, 11);
+    let masked = val;
+    if (val.length > 9) {
+      masked = val.replace(/^(\d{3})(\d{3})(\d{3})(\d{0,2}).*/, '$1.$2.$3-$4');
+    } else if (val.length > 6) {
+      masked = val.replace(/^(\d{3})(\d{3})(\d{0,3}).*/, '$1.$2.$3');
+    } else if (val.length > 3) {
+      masked = val.replace(/^(\d{3})(\d{0,3}).*/, '$1.$2');
+    }
+    input.value = masked;
+    const ctrl = this.cadastroForm.get('responsavelCpf');
+    if (ctrl) ctrl.setValue(masked, { emitEvent: false });
+  }
+
   processarSucesso(response: any) {
     this.cadastroForm.reset();
     this.errors = [];

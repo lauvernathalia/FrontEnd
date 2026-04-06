@@ -103,12 +103,12 @@
       </div>
 
       <div class="steps-wrapper">
-        <ul class="steps">
+          <ul class="steps">
           <li *ngFor="let label of ['Dados parceiro','Responsável','Documentação','Informações comerciais','Contato','Endereço']; let i = index"
               (click)="setActiveTab(i+1)"
               [class.active]="activeTab === (i+1)">
             <div class="step-num">{{i+1}}</div>
-            <div class="step-text">{{i+1}}. {{label}}</div>
+            <div class="step-text">{{label}}</div>
           </li>
         </ul>
       </div>
@@ -152,8 +152,18 @@
           </div>
 
           <div *ngIf="activeTab === 2">
-            <h3>Responsável</h3>
-            <p>Conteúdo da aba Responsável (exemplo).</p>
+            <div class="resumo-header"><h2>Responsável pela empresa</h2></div>
+
+            <div class="form-group">
+              <label class="form-label">Nome completo do responsável*</label>
+              <input class="form-control" placeholder="Digite o nome do responsável" formControlName="responsavelName">
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">CPF do responsável*</label>
+              <input class="form-control" placeholder="000.000.000-00" maxlength="14" formControlName="responsavelCpf" (input)="onCpfInput($event)">
+            </div>
+
             <div style="margin-top:12px;">
               <button type="button" class="resumo-btn" (click)="prevTab()">← Voltar</button>
               <button type="button" class="resumo-btn" style="margin-left:8px" (click)="nextTab()">Salvar e continuar →</button>

@@ -775,20 +775,29 @@ input.form-control:focus, textarea.form-control:focus {
 }
 .page-header {
   margin-bottom: 18px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 6px;
+}
+.page-header .back-link {
+  color: #90a4ae;
+  font-size: 13px;
+  text-decoration: none;
 }
 .page-header h1 {
   font-size: 20px;
   font-weight: 600;
   color: #263238;
+  margin: 0;
 }
 
-/* Steps / Tabs for multi-step form */
 .steps-wrapper { margin: 12px 0 18px; }
-.steps { list-style: none; padding: 0; margin: 0; display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
-.steps li { display: flex; align-items: center; gap: 10px; padding: 8px 12px; border-radius: 10px; border: 1px solid #e0e7ef; background: transparent; cursor: pointer; color: #90a4ae; }
-.steps li .step-num { width: 30px; height: 30px; border-radius: 999px; display: flex; align-items: center; justify-content: center; border: 1px solid #cbdedd; color: #90a4ae; font-weight: 600; background: #fff; }
-.steps li .step-text { font-size: 13px; }
-.steps li.active { border-color: #36a76b; color: #2D7D4F; background: #ffffff; box-shadow: 0 6px 18px rgba(54,167,107,0.04); }
+.steps { list-style: none; padding: 0; margin: 0; display: flex; gap: 24px; align-items: center; flex-wrap: nowrap; border-bottom: 1px solid #eef3ef; padding-bottom: 8px; }
+.steps li { display: flex; align-items: center; gap: 8px; padding: 6px 0; border-radius: 0; border: none; background: transparent; cursor: pointer; color: #90a4ae; font-size: 14px; }
+.steps li .step-num { width: 24px; height: 24px; border-radius: 999px; display: flex; align-items: center; justify-content: center; border: 1px solid #cbdedd; color: #90a4ae; font-weight: 600; background: transparent; font-size: 12px; }
+.steps li .step-text { font-size: 13px; color: inherit; }
+.steps li.active { color: #2D7D4F; border-bottom: 3px solid #2D7D4F; padding-bottom: 6px; }
 .steps li.active .step-num { border-color: #36a76b; background: #e9f8ee; color: #36a76b; }
 
 .tab-content { margin-top: 8px; }
@@ -799,6 +808,13 @@ input.form-control:focus, textarea.form-control:focus {
 
 /* ensure document cards area sits nicely */
 .document-cards { margin-top:8px; }
+
+/* Local form layout for cadastro forms */
+.form-group { margin-bottom: 18px; max-width: 640px; }
+.resumo-header h2 { font-size: 18px; margin: 0 0 10px 0; color: #263238; }
+
+/* CPF specific input sizing (keeps reasonably sized but responsive) */
+.form-group .cpf-input, input[formControlName="responsavelCpf"] { max-width: 320px; }
 
 
 .grid {
@@ -2048,11 +2064,11 @@ input.form-control:focus, textarea.form-control:focus {
 
 /* Styles moved from cadastroest.component.html */
 .page-container { padding: 18px; }
-.page-header { display:flex; justify-content:space-between; align-items:center; margin-bottom:12px; }
+.page-header { display:flex; flex-direction:column; align-items:flex-start; margin-bottom:12px; }
 .breadcrumbs { color:#6b6b6b; }
 .page-header-left { display:flex; flex-direction:column; gap:6px; }
 .page-title { display:flex; flex-direction:column; }
-.page-title h1 { margin:0; font-size:20px; font-weight:600; color:#263238; }
+.page-title h1 { margin:0; font-size:20px; font-weight:600; color:#263238; text-align:left; }
 .page-subtitle { margin:4px 0 0; color:#90a4ae; font-size:13px; }
 .page-actions { display:flex; gap:8px; align-items:center; }
 .search-input { padding:6px 8px; }
