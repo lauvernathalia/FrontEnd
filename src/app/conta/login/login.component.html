@@ -34,6 +34,16 @@
         </div>
 
         <div class="form-group">
+            <label class="col-md-2 control-label">nome completo</label>
+            <div class="col-md-10">
+                <input class="form-control" id="nometeste" placeholder="nome completo (requerido)" formControlName="nometeste" [ngClass]="{'is-invalid': displayMessage.nometeste }" />
+                <span class="text-danger" *ngIf="displayMessage.nometeste">
+                                <p [innerHTML]="displayMessage.nometeste"></p>
+                            </span>
+            </div>
+        </div>
+
+        <div class="form-group">
             <div class="col-md-4 col-md-offset-2">
                 <span><button class="btn btn-success" id="Login" [disabled]="!loginForm.valid" type="submit">Login</button></span>
             </div>

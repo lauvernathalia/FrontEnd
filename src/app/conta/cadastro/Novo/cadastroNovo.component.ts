@@ -124,6 +124,27 @@ isCollapsed = false;
     let senha = new UntypedFormControl('', [Validators.required, CustomValidators.rangeLength([6, 15])]);
     let senhaConfirm = new UntypedFormControl('', [Validators.required, CustomValidators.rangeLength([6, 15]), CustomValidators.equalTo(senha)]);
 
+    
+    this.licenciadoForm = this.fb.group({
+      parceiroNome: ['', [Validators.required]],
+      email: ['', [Validators.required, Validators.email]],
+      password: senha,
+      confirmPassword: senhaConfirm,
+      documentType: ['cnpj'],
+      cnpj: [''],
+      cpf: [''],
+      razaoSocial: [''],
+      representante: [''],
+      modalidade: [''],
+      telefone: [''],
+      responsavelName: [''],
+      responsavelCpf: [''],
+      responsavelCargo: [''],
+      responsavelTelefone: [''],
+      responsavelEmail: ['']
+    });
+
+
     this.cadastroForm = this.fb.group({
       parceiroNome: ['', [Validators.required]],
       email: ['', [Validators.required, Validators.email]],
