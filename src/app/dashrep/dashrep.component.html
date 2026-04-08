@@ -46,25 +46,31 @@
       <a class="menu-item" (click)="toggleSubmenu(1)">
         <div class="menu-main">
           <span class="icon-circle"><i class="fas fa-briefcase"></i></span>
-          <span class="menu-label">Cartôes</span>
+          <span class="menu-label">Cartões</span>
         </div>
         <span class="menu-chevron"><i class="fas fa-chevron-down"></i></span>
       </a>
       <div class="submenu" *ngIf="openedMenu === 1">
         <a class="submenu-item">Meus Cartões</a>
         <a class="submenu-item">Solicitar</a>
+        <a class="submenu-item">Desbloquear</a>
+        <a class="submenu-item">Bloquear</a>
+        <a class="submenu-item">Extrato</a>
       </div>
 
       <a class="menu-item" (click)="toggleSubmenu(2)">
         <div class="menu-main">
           <span class="icon-circle"><i class="fas fa-tools"></i></span>
-          <span class="menu-label">Equipamentos</span>
+          <span class="menu-label">Cobranças</span>
         </div>
         <span class="menu-chevron"><i class="fas fa-chevron-down"></i></span>
       </a>
       <div class="submenu" *ngIf="openedMenu === 2">
-        <a class="submenu-item">Dispositivos</a>
-        <a class="submenu-item">Manutenção</a>
+        <a class="submenu-item">Gestão das Cobranças</a>
+        <a class="submenu-item">Boletos bancários</a>
+         <a class="submenu-item">Receber por QR Code</a>
+          <a class="submenu-item">Venda digitada</a>
+           <a class="submenu-item">Link de pagamento</a>
       </div>
 
       <a class="menu-item" (click)="toggleSubmenu(3)">
