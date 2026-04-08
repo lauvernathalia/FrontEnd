@@ -76,37 +76,44 @@
       <a class="menu-item" (click)="toggleSubmenu(3)">
         <div class="menu-main">
           <span class="icon-circle"><i class="fas fa-shield-alt"></i></span>
-          <span class="menu-label">Compliance</span>
+          <span class="menu-label">Minnhas vendas</span>
         </div>
         <span class="menu-chevron"><i class="fas fa-chevron-down"></i></span>
       </a>
       <div class="submenu" *ngIf="openedMenu === 3">
-        <a class="submenu-item">Políticas</a>
-        <a class="submenu-item">Auditorias</a>
+        <a class="submenu-item">Histórico de vendas</a>
+        <a class="submenu-item">Resumo de vendas</a>
+         <a class="submenu-item">Simular venda</a>
+          <a class="submenu-item">Extrato</a>
+           <a class="submenu-item">Venda por link</a>
+            <a class="submenu-item">Boletos bancários</a>
       </div>
 
       <a class="menu-item" (click)="toggleSubmenu(4)">
         <div class="menu-main">
           <span class="icon-circle"><i class="fas fa-user-tie"></i></span>
-          <span class="menu-label">Vendedor (Eu)</span>
+          <span class="menu-label">Minha conta </span>
         </div>
         <span class="menu-chevron"><i class="fas fa-chevron-down"></i></span>
       </a>
       <div class="submenu" *ngIf="openedMenu === 4">
-        <a class="submenu-item">Minhas vendas</a>
-        <a class="submenu-item">Metas</a>
+        <a class="submenu-item">Meus dados</a>
+        <a class="submenu-item">Meios de recebimentos</a>
+         <a class="submenu-item">Minhas taxas</a>
+          <a class="submenu-item">Maquininha</a>
       </div>
 
       <a class="menu-item" (click)="toggleSubmenu(5)">
         <div class="menu-main">
           <span class="icon-circle"><i class="far fa-chart-bar"></i></span>
-          <span class="menu-label">Relatórios</span>
+          <span class="menu-label">Maquininhas</span>
         </div>
         <span class="menu-chevron"><i class="fas fa-chevron-down"></i></span>
       </a>
       <div class="submenu" *ngIf="openedMenu === 5">
-        <a class="submenu-item">Vendas</a>
-        <a class="submenu-item">Comissões</a>
+        <a class="submenu-item">Habilitar terminais</a>
+        <a class="submenu-item">Solicitar suprimentos</a>
+        <a class="submenu-item">Máquina adicional</a>
       </div>
     </nav>
   </aside>
