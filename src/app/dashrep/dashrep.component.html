@@ -134,25 +134,98 @@
   </aside>
 
   <main class="main-content">
-    
-<article class="dash-card bandeiras-section" style="grid-column:1 / -1">
-              <h3 class="dash-card-title">Vendas por bandeiras</h3>
-              <div class="bandeiras-body" #bandeirasContainer>
-                <article class="bandeira-card" *ngFor="let b of bandeiras; let i = index">
-                  <div class="bandeira-logo"><img [src]="'assets/bandeiras/' + b + '.svg'" [alt]="b"></div>
-                  <div class="bandeira-nome">{{ (b | titlecase) }} (R$)</div>
-                  <div class="bandeira-valor">1.540.000,00</div>
-                  <div class="bandeira-variacao up">↑ 9.20%</div>
-                  <button class="btn-light">Ver transações</button>
-                </article>
+    <section class="quick-access">
+      <h3 class="qa-title">Acesso rápido</h3>
+      <div class="qa-cards">
+        <div class="qa-card">
+          <div class="card-header">Cobranças</div>
+          <div class="card-body">
+            <div class="options options--green">
+              <div class="option">
+                <div class="opt-icon"><i class="fas fa-file-invoice"></i></div>
+                <div class="opt-label">Boleto</div>
               </div>
-              <div class="bandeiras-pagination">
-                <button *ngFor="let p of pages; let i = index" class="bandeira-dot" (click)="scrollToPage(i)" [class.active]="activePage===i" aria-label="Ir para página {{i+1}}"></button>
+              <div class="option">
+                <div class="opt-icon"><i class="fas fa-link"></i></div>
+                <div class="opt-label">Link</div>
               </div>
-            </article>
-            
- 
-    
+              <div class="option">
+                <div class="opt-icon"><i class="far fa-money-bill-alt"></i></div>
+                <div class="opt-label">Carnê</div>
+              </div>
+              <div class="option">
+                <div class="opt-icon"><i class="fas fa-sync-alt"></i></div>
+                <div class="opt-label">Recorrência</div>
+              </div>
+              <div class="option">
+                <div class="opt-icon"><i class="fas fa-qrcode"></i></div>
+                <div class="opt-label">Pix</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="qa-card">
+          <div class="card-header">Transferências</div>
+          <div class="card-body">
+            <div class="options options--pink">
+              <div class="option">
+                <div class="opt-icon"><i class="far fa-user-circle"></i></div>
+                <div class="opt-label">Contas</div>
+              </div>
+              <div class="option">
+                <div class="opt-icon"><i class="fas fa-qrcode"></i></div>
+                <div class="opt-label">Pix</div>
+              </div>
+              <div class="option">
+                <div class="opt-icon"><i class="fas fa-exchange-alt"></i></div>
+                <div class="opt-label">TED</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="qa-card">
+          <div class="card-header">Pagamentos</div>
+          <div class="card-body">
+            <div class="options options--blue">
+              <div class="option">
+                <div class="opt-icon"><i class="fas fa-file-invoice"></i></div>
+                <div class="opt-label">Boleto</div>
+              </div>
+              <div class="option">
+                <div class="opt-icon"><i class="fas fa-qrcode"></i></div>
+                <div class="opt-label">Pix</div>
+              </div>
+              <div class="option">
+                <div class="opt-icon"><i class="fas fa-credit-card"></i></div>
+                <div class="opt-label">Crédito</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="qa-card">
+          <div class="card-header">Câmbio</div>
+          <div class="card-body">
+            <div class="options options--orange">
+              <div class="option">
+                <div class="opt-icon"><i class="fas fa-chart-line"></i></div>
+                <div class="opt-label">Boleto</div>
+              </div>
+              <div class="option">
+                <div class="opt-icon"><i class="fas fa-qrcode"></i></div>
+                <div class="opt-label">Pix</div>
+              </div>
+              <div class="option">
+                <div class="opt-icon"><i class="fas fa-credit-card"></i></div>
+                <div class="opt-label">Crédito</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
   </main>
 </div>
 
