@@ -136,8 +136,9 @@
   <main class="main-content">
     <section class="quick-access">
       <h3 class="qa-title">Acesso rápido</h3>
-      <div class="qa-cards">
-        <div class="qa-card">
+      <div class="qa-carousel" >
+        <div class="qa-track" #qaContainer>
+          <div class="qa-card">
           <div class="card-header">Cobranças</div>
           <div class="card-body">
             <div class="options options--green">
@@ -223,10 +224,79 @@
               </div>
             </div>
           </div>
+          </div>
+
+          <div class="qa-card">
+            <div class="card-header">Transferências</div>
+            <div class="card-body">
+              <div class="options options--pink">
+                <div class="option">
+                  <div class="opt-icon"><i class="far fa-user-circle"></i></div>
+                  <div class="opt-label">Contas</div>
+                </div>
+                <div class="option">
+                  <div class="opt-icon"><i class="fas fa-qrcode"></i></div>
+                  <div class="opt-label">Pix</div>
+                </div>
+                <div class="option">
+                  <div class="opt-icon"><i class="fas fa-exchange-alt"></i></div>
+                  <div class="opt-label">TED</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="qa-card">
+            <div class="card-header">Pagamentos</div>
+            <div class="card-body">
+              <div class="options options--blue">
+                <div class="option">
+                  <div class="opt-icon"><i class="fas fa-file-invoice"></i></div>
+                  <div class="opt-label">Boleto</div>
+                </div>
+                <div class="option">
+                  <div class="opt-icon"><i class="fas fa-qrcode"></i></div>
+                  <div class="opt-label">Pix</div>
+                </div>
+                <div class="option">
+                  <div class="opt-icon"><i class="fas fa-credit-card"></i></div>
+                  <div class="opt-label">Crédito</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="qa-card">
+            <div class="card-header">Câmbio</div>
+            <div class="card-body">
+              <div class="options options--orange">
+                <div class="option">
+                  <div class="opt-icon"><i class="fas fa-chart-line"></i></div>
+                  <div class="opt-label">Boleto</div>
+                </div>
+                <div class="option">
+                  <div class="opt-icon"><i class="fas fa-qrcode"></i></div>
+                  <div class="opt-label">Pix</div>
+                </div>
+                <div class="option">
+                  <div class="opt-icon"><i class="fas fa-credit-card"></i></div>
+                  <div class="opt-label">Crédito</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="qa-indicators" *ngIf="qaPagesCount > 1">
+          <button type="button" class="qa-dot" *ngFor="let p of [].constructor(qaPagesCount); let i = index"
+            [class.active]="i === activeQaPage" (click)="scrollQaTo(i)" aria-label="Ir para página {{i + 1}}"></button>
         </div>
       </div>
     </section>
   </main>
+
+
+  
 </div>
 
 

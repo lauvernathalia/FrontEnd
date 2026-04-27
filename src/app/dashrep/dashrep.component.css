@@ -427,6 +427,26 @@
   .qa-cards { grid-template-columns: repeat(1, 1fr); }
 }
 
+/* Carousel styles */
+.qa-carousel { position: relative; }
+.qa-track { display:flex; gap:18px; padding:10px 6px; overflow-x:auto; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; }
+.qa-track::-webkit-scrollbar { height: 8px; }
+.qa-track::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.08); border-radius: 6px; }
+.qa-card { flex: 0 0 280px; scroll-snap-align: start; }
+.qa-card:last-child { margin-right: 6px; }
+
+.qa-indicators { position: absolute; right: 12px; bottom: 8px; display:flex; gap:8px; }
+.qa-dot { width:10px; height:10px; border-radius:50%; border:none; background: rgba(34,49,63,0.08); cursor:pointer; padding:0; }
+.qa-dot.active { background: #2D7D4F; box-shadow: 0 0 0 4px rgba(45,125,79,0.08); }
+
+@media (max-width: 900px) {
+  .qa-card { flex: 0 0 220px; }
+}
+@media (max-width: 480px) {
+  .qa-card { flex: 0 0 90%; }
+  .qa-indicators { right: 8px; bottom: 6px; }
+}
+
 .resumo-header {
   margin: 4px 0 10px;
 }

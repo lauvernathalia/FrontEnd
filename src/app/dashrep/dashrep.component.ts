@@ -58,6 +58,12 @@ isCollapsed = false;
     activePage = 0; // currently visible page (dot)
     @ViewChild('bandeirasContainer', { static: false }) bandeirasContainer!: ElementRef<HTMLDivElement>;
 
+  // Quick access (Acesso rápido) carousel state
+  @ViewChild('qaContainer', { static: false }) qaContainer!: ElementRef<HTMLDivElement>;
+  qaPagesCount = 1;
+  activeQaPage = 0;
+  private _qaScrollHandler = () => this._onQaScroll();
+
   private _bandeirasScrollHandler = () => this._onBandeirasScroll();
   
   ngAfterViewInit(): void {
@@ -72,6 +78,11 @@ isCollapsed = false;
       if (el) {
         el.addEventListener('scroll', this._bandeirasScrollHandler, { passive: true });
       }
+      const qa = this.qaContainer?.nativeElement;
+      if (qa) {
+        qa.addEventListener('scroll', this._qaScrollHandler, { passive: true });
+        this.updateQaPagination();
+      }
     }, 20);
   }
 
@@ -79,6 +90,8 @@ isCollapsed = false;
     window.removeEventListener('resize', this._resizeHandler);
     const el = this.bandeirasContainer?.nativeElement;
     if (el) el.removeEventListener('scroll', this._bandeirasScrollHandler);
+    const qa = this.qaContainer?.nativeElement;
+    if (qa) qa.removeEventListener('scroll', this._qaScrollHandler);
   }
 
   /** Scrolls the bandeiras container to the given index (smooth) */
@@ -123,12 +136,37 @@ isCollapsed = false;
     this.activeBandeira = Math.max(0, Math.min(this.bandeiras.length - 1, singleIdx));
   }
 
+  /* Quick access handlers */
+  private _onQaScroll() {
+    const el = this.qaContainer?.nativeElement;
+    if (!el) return;
+    const pageIdx = Math.round(el.scrollLeft / el.clientWidth);
+    this.activeQaPage = Math.max(0, Math.min(this.qaPagesCount - 1, pageIdx));
+  }
+
+  scrollQaTo(pageIndex: number) {
+    const el = this.qaContainer?.nativeElement;
+    if (!el) return;
+    const left = Math.round(pageIndex * el.clientWidth);
+    el.scrollTo({ left, behavior: 'smooth' });
+    this.activeQaPage = pageIndex;
+  }
+
+  updateQaPagination() {
+    const el = this.qaContainer?.nativeElement;
+    if (!el) return;
+    const pages = Math.max(1, Math.ceil(el.scrollWidth / el.clientWidth));
+    this.qaPagesCount = pages;
+    // clamp active page
+    this.activeQaPage = Math.max(0, Math.min(this.qaPagesCount - 1, this.activeQaPage));
+  }
+
   /** Helper getter used by template to render pages */
   get pages() {
     return Array.from({ length: Math.ceil(this.bandeiras.length / this.cardsPerPage) });
   }
 
-  private _resizeHandler = () => { this.updateSalesSvg(); };
+  private _resizeHandler = () => { this.updateSalesSvg(); this.updateQaPagination(); };
 
   /**
    * updateSalesSvg
