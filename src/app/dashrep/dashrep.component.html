@@ -135,7 +135,13 @@
 
   <main class="main-content">
     <section class="quick-access">
-      <h3 class="qa-title">Acesso rápido</h3>
+      <div class="qa-header">
+        <h3 class="qa-title">Acesso rápido</h3>
+        <div class="qa-filter" role="button" tabindex="0" aria-haspopup="listbox" aria-label="Selecionar período">
+          <span class="filter-text">Últimos 7 dias</span>
+          <i class="fas fa-chevron-down filter-caret" aria-hidden="true"></i>
+        </div>
+      </div>
       <div class="qa-carousel" >
         <div class="qa-track" #qaContainer>
           <div class="qa-card">
@@ -290,6 +296,74 @@
         <div class="qa-indicators" *ngIf="qaPagesCount > 1">
           <button type="button" class="qa-dot" *ngFor="let p of [].constructor(qaPagesCount); let i = index"
             [class.active]="i === activeQaPage" (click)="scrollQaTo(i)" aria-label="Ir para página {{i + 1}}"></button>
+        </div>
+      </div>
+    </section>
+    <!-- Meu saldo section -->
+    <section class="meu-saldo-section">
+      <div class="saldo-header">
+        <div class="saldo-title-wrapper">
+          <h3 class="saldo-title">Meu saldo</h3>
+          <div class="saldo-decor"></div>
+        </div>
+        <div class="saldo-badge">Aluguel em atraso</div>
+      </div>
+
+      <div class="saldo-cards">
+        <div class="saldo-card">
+          <div class="card-top">
+            <div class="card-label">
+              <i class="fas fa-wallet label-icon"></i>
+              <div class="label-text">Saldo (R$)</div>
+            </div>
+            <div class="account-id">Ag 0050 CC 446884-8 <i class="fas fa-chevron-down small-caret"></i></div>
+          </div>
+
+          <div class="card-value">100.890.540<span class="cents">.00</span></div>
+          <div class="card-change up">↑ 5.20%</div>
+
+          <div class="saldo-actions">
+            <button class="action"><i class="fas fa-arrow-up"></i><span>Sacar</span></button>
+            <button class="action"><i class="fas fa-exchange-alt"></i><span>Transferir</span></button>
+            <button class="action"><i class="fas fa-file-alt"></i><span>Extrato</span></button>
+          </div>
+        </div>
+
+        <div class="saldo-card">
+          <div class="card-top">
+            <div class="card-label">
+              <i class="fas fa-dollar-sign label-icon"></i>
+              <div class="label-text">Saldo em dólares (U$)</div>
+            </div>
+            <div class="account-id">Carteira <i class="fas fa-chevron-down small-caret"></i></div>
+          </div>
+
+          <div class="card-value">995,540<span class="cents">.00</span></div>
+          <div class="card-change up">↑ 5.20%</div>
+
+          <div class="saldo-actions">
+            <button class="action"><i class="fas fa-plus"></i><span>Adicionar</span></button>
+            <button class="action"><i class="fas fa-exchange-alt"></i><span>Converter</span></button>
+            <button class="action"><i class="fas fa-paper-plane"></i><span>Enviar</span></button>
+          </div>
+        </div>
+
+        <div class="saldo-card">
+          <div class="card-top">
+            <div class="card-label">
+              <i class="fas fa-calendar-alt label-icon"></i>
+              <div class="label-text">Lançamentos futuros (R$)</div>
+            </div>
+            <div class="account-id spacer"></div>
+          </div>
+
+          <div class="card-value">100.890.540<span class="cents">.00</span></div>
+          <div class="card-change up">↑ 5.20%</div>
+
+          <div class="saldo-actions">
+            <button class="action"><i class="fas fa-download"></i><span>Antecipar</span></button>
+            <div class="info-tag">Próximo: 25/08/2023</div>
+          </div>
         </div>
       </div>
     </section>
