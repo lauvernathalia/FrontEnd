@@ -63,6 +63,12 @@ isCollapsed = false;
   qaPagesCount = 1;
   activeQaPage = 0;
   private _qaScrollHandler = () => this._onQaScroll();
+  
+  // Explore solutions carousel state
+  @ViewChild('exploreContainer', { static: false }) exploreContainer!: ElementRef<HTMLDivElement>;
+  explorePagesCount = 1;
+  activeExplorePage = 0;
+  private _exploreScrollHandler = () => this._onExploreScroll();
 
   private _bandeirasScrollHandler = () => this._onBandeirasScroll();
   
@@ -83,6 +89,11 @@ isCollapsed = false;
         qa.addEventListener('scroll', this._qaScrollHandler, { passive: true });
         this.updateQaPagination();
       }
+      const explore = this.exploreContainer?.nativeElement;
+      if (explore) {
+        explore.addEventListener('scroll', this._exploreScrollHandler, { passive: true });
+        this.updateExplorePagination();
+      }
     }, 20);
   }
 
@@ -92,6 +103,8 @@ isCollapsed = false;
     if (el) el.removeEventListener('scroll', this._bandeirasScrollHandler);
     const qa = this.qaContainer?.nativeElement;
     if (qa) qa.removeEventListener('scroll', this._qaScrollHandler);
+    const explore = this.exploreContainer?.nativeElement;
+    if (explore) explore.removeEventListener('scroll', this._exploreScrollHandler);
   }
 
   /** Scrolls the bandeiras container to the given index (smooth) */
@@ -161,12 +174,36 @@ isCollapsed = false;
     this.activeQaPage = Math.max(0, Math.min(this.qaPagesCount - 1, this.activeQaPage));
   }
 
+  /* Explore carousel handlers */
+  private _onExploreScroll() {
+    const el = this.exploreContainer?.nativeElement;
+    if (!el) return;
+    const pageIdx = Math.round(el.scrollLeft / el.clientWidth);
+    this.activeExplorePage = Math.max(0, Math.min(this.explorePagesCount - 1, pageIdx));
+  }
+
+  scrollExploreTo(pageIndex: number) {
+    const el = this.exploreContainer?.nativeElement;
+    if (!el) return;
+    const left = Math.round(pageIndex * el.clientWidth);
+    el.scrollTo({ left, behavior: 'smooth' });
+    this.activeExplorePage = pageIndex;
+  }
+
+  updateExplorePagination() {
+    const el = this.exploreContainer?.nativeElement;
+    if (!el) return;
+    const pages = Math.max(1, Math.ceil(el.scrollWidth / el.clientWidth));
+    this.explorePagesCount = pages;
+    this.activeExplorePage = Math.max(0, Math.min(this.explorePagesCount - 1, this.activeExplorePage));
+  }
+
   /** Helper getter used by template to render pages */
   get pages() {
     return Array.from({ length: Math.ceil(this.bandeiras.length / this.cardsPerPage) });
   }
 
-  private _resizeHandler = () => { this.updateSalesSvg(); this.updateQaPagination(); };
+  private _resizeHandler = () => { this.updateSalesSvg(); this.updateQaPagination(); this.updateExplorePagination(); };
 
   /**
    * updateSalesSvg

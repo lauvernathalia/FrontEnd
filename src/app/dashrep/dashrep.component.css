@@ -447,6 +447,46 @@
   .qa-indicators { right: 8px; bottom: 6px; }
 }
 
+/* Explore nossas soluções styles (carousel) */
+.explore-section { margin-top: 22px; margin-bottom: 28px; }
+.explore-header { display:flex; align-items:center; justify-content:flex-start; gap:12px; margin-bottom:12px; }
+.explore-title-wrapper { display:flex; align-items:center; gap:12px; }
+.explore-title { color:#263238; font-weight:700; margin:0; }
+.explore-decor { width:120px; height:4px; background:linear-gradient(90deg,#e9f8ee,#f0f5f2); border-radius:4px; }
+
+.explore-carousel { position: relative; }
+.explore-track { display:flex; gap:18px; padding:10px 6px; overflow-x:auto; scroll-snap-type:x mandatory; -webkit-overflow-scrolling: touch; }
+.explore-track::-webkit-scrollbar { height:8px; }
+.explore-card { flex: 0 0 160px; background:#fff; border-radius:12px; box-shadow:0 8px 24px rgba(34,49,63,0.06); overflow:hidden; scroll-snap-align:start; display:flex; flex-direction:column; align-items:stretch; }
+.explore-top { height:64px; display:flex; align-items:center; justify-content:center; color:#fff; font-size:20px; }
+.explore-label { padding:14px; text-align:center; font-weight:700; }
+
+/* colors */
+.explore-yellow { background:#f6c800; }
+.explore-yellow-text { color:#f6c800; }
+.explore-pink { background:#c85bbf; }
+.explore-pink-text { color:#c85bbf; }
+.explore-purple { background:#7b5bd6; }
+.explore-purple-text { color:#7b5bd6; }
+.explore-blue { background:#5b9cc3; }
+.explore-blue-text { color:#5b9cc3; }
+.explore-orange { background:#ff8a50; }
+.explore-orange-text { color:#ff8a50; }
+.explore-red { background:#e85b5b; }
+.explore-red-text { color:#e85b5b; }
+
+.explore-indicators { position:absolute; right:12px; bottom:8px; display:flex; gap:8px; }
+.explore-dot { width:10px; height:10px; border-radius:50%; border:none; background: rgba(34,49,63,0.08); cursor:pointer; }
+.explore-dot.active { background:#2D7D4F; box-shadow:0 0 0 4px rgba(45,125,79,0.08); }
+
+@media (max-width: 900px) {
+  .explore-card { flex: 0 0 140px; }
+}
+@media (max-width: 480px) {
+  .explore-card { flex: 0 0 46%; }
+  .explore-indicators { right:8px; }
+}
+
 /* Header + filter */
 .qa-header { display:flex; align-items:center; justify-content:space-between; gap:12px; margin-bottom:6px; }
 .qa-filter { display:inline-flex; align-items:center; gap:8px; cursor:pointer; background: transparent; padding:6px 10px; border-radius:999px; border: none; }
