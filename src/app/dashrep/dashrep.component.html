@@ -418,7 +418,8 @@
         </div>
       </div>
     </section>
-        <!-- Progressão das vendas (inserido abaixo de Explore nossas soluções) -->
+
+    <!-- Progressão das vendas (inserido abaixo de Explore nossas soluções) -->
     <section class="progressao-vendas">
       <div class="progress-row">
         <div class="progress-header-row">
@@ -518,11 +519,25 @@
         </div>
       </div>
     </section>
+
+    <section class="sales-section" aria-label="Minhas vendas">
+      <app-section-title title="Minhas vendas"></app-section-title>
+
+      <div class="sales-grid">
+        <app-sales-card
+          *ngFor="let card of salesCards"
+          [title]="card.title"
+          [value]="card.value"
+          [percent]="card.percent"
+          [trend]="card.trend"
+          [actionLabel]="card.actionLabel"
+          [actionIcon]="card.actionIcon">
+        </app-sales-card>
+      </div>
+    </section>
     
   </main>
 
-
-  
 </div>
 
 

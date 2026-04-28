@@ -5,11 +5,15 @@ import { DashrepAppComponent } from './dashrep.app.component';
 import { DashrepRoutingModule } from './dashrep.route';
 import { DashrepComponent } from './dashrep.component';
 import { DashrepService } from './dashrep.service';
+import { SectionTitleComponent } from './section-title.component';
+import { SalesCardComponent } from './sales-card.component';
 
 @NgModule({
   declarations: [
     DashrepAppComponent,
-    DashrepComponent
+    DashrepComponent,
+    SectionTitleComponent,
+    SalesCardComponent
   ],
   imports: [
     CommonModule,

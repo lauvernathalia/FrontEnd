@@ -289,6 +289,7 @@
   padding: 24px 28px 32px;
   height: 100%;
   overflow-y: auto;
+  background: #f5f7fb;
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none;    /* Firefox */
 }
@@ -398,13 +399,157 @@
   background: #2D7D4F;
 }
 
+.sales-section {
+  margin-bottom: 18px;
+}
+
+.sales-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 24px 18px;
+}
+
+@media (max-width: 1100px) {
+  .sales-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 640px) {
+  .main-content {
+    padding: 18px 16px 24px;
+  }
+
+  .sales-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.mix-tpv-section {
+  margin-bottom: 18px;
+}
+
+.mix-tpv-header {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  margin-bottom: 18px;
+}
+
+.mix-tpv-title {
+  margin: 0;
+  font-size: 16px;
+  line-height: 1;
+  font-weight: 700;
+  color: #8a97a8;
+}
+
+.mix-tpv-decor {
+  flex: 0 0 92px;
+  height: 2px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #b8dfc2 0%, #93cf9d 100%);
+}
+
+.mix-tpv-grid {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.mix-tpv-card {
+  min-height: 136px;
+  padding: 18px 18px 16px;
+  border-radius: 18px;
+  background: #ffffff;
+  box-shadow: 0 12px 28px rgba(32, 56, 91, 0.08);
+  border: 1px solid rgba(148, 163, 184, 0.16);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.mix-tpv-label {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.25;
+  color: #7d8ea3;
+  font-weight: 600;
+}
+
+.mix-tpv-value {
+  display: flex;
+  align-items: flex-end;
+  gap: 0;
+  color: #17324d;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+}
+
+.mix-tpv-integer {
+  font-size: 29px;
+  line-height: 1;
+}
+
+.mix-tpv-decimal {
+  font-size: 15px;
+  line-height: 1;
+  position: relative;
+  top: -2px;
+  margin-left: 2px;
+}
+
+.mix-tpv-growth {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  line-height: 1;
+  font-weight: 600;
+  color: #39b56a;
+}
+
+.mix-tpv-growth i {
+  font-size: 14px;
+}
+
+@media (max-width: 1280px) {
+  .mix-tpv-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 768px) {
+  .main-content {
+    padding: 18px 16px 24px;
+  }
+
+  .mix-tpv-header {
+    margin-bottom: 14px;
+  }
+
+  .mix-tpv-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 560px) {
+  .mix-tpv-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .mix-tpv-card {
+    min-height: 128px;
+  }
+}
+
 /* Progressão das vendas */
 .progressao-vendas { margin-top: 20px; display:flex; justify-content:center }
 .progress-row { display:flex; flex-direction:column; gap:12px; width:100%; }
 .progress-header-row { display:flex; align-items:center; gap:12px; margin-bottom:6px }
 .progress-title { font-size:18px; color:#263238; font-weight:700; margin:0 }
 .progress-decor { width:60px; height:4px; background:linear-gradient(90deg,#7fd48a,#2D7D4F); border-radius:4px }
-.progress-card { display:flex; gap:18px; background:#fff; border-radius:14px; padding:16px; box-shadow:0 12px 28px rgba(34,49,63,0.06); border:1px solid rgba(34,49,63,0.04); align-items:stretch; max-width:900px; width:100% }
+.progress-card { display:flex; gap:18px; background:#fff; border-radius:14px; padding:16px; box-shadow:0 12px 28px rgba(34,49,63,0.06); border:1px solid rgba(34,49,63,0.04); align-items:stretch; max-width:1000px; width:100% }
 .progress-left { width:260px; display:flex; flex-direction:column; gap:12px }
 .indicator { display:flex; gap:12px; align-items:center; padding:10px; border-radius:12px; background:#fff; box-shadow:0 8px 18px rgba(18,87,53,0.03); border:1px solid rgba(34,49,63,0.03) }
 .icon-box { width:44px; height:44px; background:#f6fbf7; border-radius:10px; display:flex; align-items:center; justify-content:center; color:#36A76B; font-size:16px }
