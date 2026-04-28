@@ -300,6 +300,7 @@
       </div>
     </section>
     
+
     
     <!-- Meu saldo section -->
     <section class="meu-saldo-section">
@@ -414,6 +415,106 @@
         <div class="explore-indicators" *ngIf="explorePagesCount > 1">
           <button class="explore-dot" *ngFor="let p of [].constructor(explorePagesCount); let i = index"
             [class.active]="i === activeExplorePage" (click)="scrollExploreTo(i)" aria-label="Ir para página {{i + 1}}"></button>
+        </div>
+      </div>
+    </section>
+        <!-- Progressão das vendas (inserido abaixo de Explore nossas soluções) -->
+    <section class="progressao-vendas">
+      <div class="progress-row">
+        <div class="progress-header-row">
+          <h3 class="progress-title">Progressão das vendas</h3>
+          <div class="progress-decor"></div>
+        </div>
+
+        <div class="progress-card">
+          <div class="progress-left">
+            <div class="indicator">
+              <div class="icon-box"><i class="fas fa-coins"></i></div>
+              <div class="indicator-body">
+                <div class="ind-label">FATURAMENTO</div>
+                <div class="ind-value">R$ 500.890,00</div>
+              </div>
+            </div>
+
+            <div class="indicator">
+              <div class="icon-box"><i class="fas fa-gift"></i></div>
+              <div class="indicator-body">
+                <div class="ind-label">TICKET MÉDIO</div>
+                <div class="ind-value">R$ 90,00</div>
+              </div>
+            </div>
+
+            <div class="indicator">
+              <div class="icon-box"><i class="fas fa-shopping-bag"></i></div>
+              <div class="indicator-body">
+                <div class="ind-label">Nº VENDAS</div>
+                <div class="ind-value">234</div>
+              </div>
+            </div>
+
+            <div class="indicator">
+              <div class="icon-box"><i class="fas fa-users"></i></div>
+              <div class="indicator-body">
+                <div class="ind-label">Nº CLIENTES</div>
+                <div class="ind-value">234</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="progress-right">
+            <div class="chart-controls">
+              <div class="chart-filter">Número de transações <i class="fas fa-caret-down"></i></div>
+              <div class="chart-filter">Físico <i class="fas fa-caret-down"></i></div>
+            </div>
+
+            <div class="chart-wrap">
+              <svg class="sales-svg" viewBox="0 0 760 220" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                  <linearGradient id="g1" x1="0" x2="0" y1="0" y2="1">
+                    <stop offset="0%" stop-color="#36A76B" stop-opacity="0.9"/>
+                    <stop offset="100%" stop-color="#36A76B" stop-opacity="0.08"/>
+                  </linearGradient>
+                </defs>
+
+                <g class="y-labels" fill="#b6c9c0" font-size="12" font-family="sans-serif">
+                  <text x="20" y="24">100K</text>
+                  <text x="20" y="56">70K</text>
+                  <text x="20" y="88">50K</text>
+                  <text x="20" y="120">30K</text>
+                  <text x="20" y="152">10K</text>
+                  <text x="20" y="184">5K</text>
+                </g>
+
+                <g class="grid" stroke="#e7efee" stroke-width="1">
+                  <line x1="60" y1="24" x2="740" y2="24"/>
+                  <line x1="60" y1="56" x2="740" y2="56"/>
+                  <line x1="60" y1="88" x2="740" y2="88"/>
+                  <line x1="60" y1="120" x2="740" y2="120"/>
+                  <line x1="60" y1="152" x2="740" y2="152"/>
+                  <line x1="60" y1="184" x2="740" y2="184"/>
+                </g>
+
+                <path class="area-fill" fill="url(#g1)" opacity="0.95"></path>
+                <path class="line-dark" fill="none" stroke="#9fd3a9" stroke-width="2"></path>
+                <path class="line-light" fill="none" stroke="#36A76B" stroke-width="2.8"></path>
+
+                <g class="months" fill="#9fb6ad" font-size="12" font-family="sans-serif" font-weight="700">
+                  <text x="60" y="204">JAN</text>
+                  <text x="115" y="204">FEV</text>
+                  <text x="170" y="204">MAR</text>
+                  <text x="225" y="204">ABR</text>
+                  <text x="280" y="204">MAI</text>
+                  <text x="335" y="204">JUN</text>
+                  <text x="390" y="204">JUL</text>
+                  <text x="445" y="204">AGO</text>
+                  <text x="500" y="204">SET</text>
+                  <text x="555" y="204">OUT</text>
+                  <text x="610" y="204">NOV</text>
+                  <text x="665" y="204">DEZ</text>
+                </g>
+              </svg>
+            </div>
+          </div>
         </div>
       </div>
     </section>

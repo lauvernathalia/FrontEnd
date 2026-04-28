@@ -1519,6 +1519,18 @@
 .sales-actions .icon-btn{ border-radius:8px; }
 .sales-cta { margin-top: 12px; align-self: start; padding: 8px 12px; border-radius: 8px; background:#e6f8ed; border:none; color:#2D7D4F; cursor:pointer; }
 
+/* Override generic absolute sales-svg for our progress card to avoid full-page overlay */
+.progressao-vendas .progress-card { position: relative; z-index: 1; overflow: hidden; }
+.progressao-vendas .sales-svg {
+  position: static !important;
+  left: auto !important;
+  top: auto !important;
+  right: auto !important;
+  bottom: auto !important;
+  width: 100% !important;
+  height: 100% !important;
+}
+
 @media (max-width: 1024px) {
   .sales-total-grid { grid-template-columns: 1fr 320px; }
 }
