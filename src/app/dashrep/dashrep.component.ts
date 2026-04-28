@@ -225,7 +225,11 @@ isCollapsed = false;
 
       const light = (this.lightValues && this.lightValues.length) ? this.lightValues : [];
       const dark = (this.darkValues && this.darkValues.length) ? this.darkValues : [];
-      if (!light.length || !dark.length) return;
+      if (!light.length) {
+        console.debug('updateSalesSvg: lightValues vazio, abortando');
+        return;
+      }
+      console.debug('updateSalesSvg: encontrado svg?', !!svg, 'light.len=', light.length, 'dark.len=', dark.length);
 
       const xStart = 80, xEnd = 680, yTop = 12, yBottom = 188;
       // mapeia valores numéricos -> {x, y} dentro do viewport do SVG
@@ -276,8 +280,26 @@ isCollapsed = false;
       // aplica as strings geradas aos elementos <path> do SVG
       const pathLight = svg.querySelector('.line-light') as SVGPathElement;
       const pathDark = svg.querySelector('.line-dark') as SVGPathElement;
-      if (pathLight) pathLight.setAttribute('d', toPath(ptsLight));
-      if (pathDark) pathDark.setAttribute('d', toPath(ptsDark));
+      if (pathLight) {
+        const d = toPath(ptsLight);
+        pathLight.setAttribute('d', d);
+        console.debug('updateSalesSvg: pathLight d set, len=', d.length);
+      }
+      if (pathDark && ptsDark.length) {
+        const d2 = toPath(ptsDark);
+        pathDark.setAttribute('d', d2);
+        console.debug('updateSalesSvg: pathDark d set, len=', d2.length);
+      }
+      // também gera o caminho preenchido (área) com base na linha `light`
+      const areaEl = svg.querySelector('.area-fill') as SVGPathElement;
+      if (areaEl && ptsLight.length) {
+        const top = toPath(ptsLight);
+        const first = ptsLight[0];
+        const last = ptsLight[ptsLight.length - 1];
+        const areaD = `${top} L ${last.x} ${yBottom} L ${first.x} ${yBottom} Z`;
+        areaEl.setAttribute('d', areaD);
+        console.debug('updateSalesSvg: area d set, len=', areaD.length);
+      }
     } catch (err) {
       console.error('updateSalesSvg error', err);
     }

@@ -299,54 +299,7 @@
         </div>
       </div>
     </section>
-    <!-- Explore nossas soluções -->
-    <section class="explore-section">
-      <div class="explore-header">
-        <div class="explore-title-wrapper">
-          <h3 class="explore-title">Explore nossas soluções</h3>
-          <div class="explore-decor"></div>
-        </div>
-      </div>
-
-      <div class="explore-carousel">
-        <div class="explore-track" #exploreContainer>
-          <div class="explore-card">
-            <div class="explore-top explore-yellow"><i class="fas fa-mobile-alt"></i></div>
-            <div class="explore-label explore-yellow-text">Recargas</div>
-          </div>
-
-          <div class="explore-card">
-            <div class="explore-top explore-pink"><i class="fas fa-credit-card"></i></div>
-            <div class="explore-label explore-pink-text">Cartões</div>
-          </div>
-
-          <div class="explore-card">
-            <div class="explore-top explore-purple"><i class="fas fa-search"></i></div>
-            <div class="explore-label explore-purple-text">Consultas</div>
-          </div>
-
-          <div class="explore-card">
-            <div class="explore-top explore-blue"><i class="fas fa-home"></i></div>
-            <div class="explore-label explore-blue-text">Consórcios</div>
-          </div>
-
-          <div class="explore-card">
-            <div class="explore-top explore-orange"><i class="fas fa-shield-alt"></i></div>
-            <div class="explore-label explore-orange-text">Seguros</div>
-          </div>
-
-          <div class="explore-card">
-            <div class="explore-top explore-red"><i class="fas fa-wallet"></i></div>
-            <div class="explore-label explore-red-text">Empréstimos</div>
-          </div>
-        </div>
-
-        <div class="explore-indicators" *ngIf="explorePagesCount > 1">
-          <button class="explore-dot" *ngFor="let p of [].constructor(explorePagesCount); let i = index"
-            [class.active]="i === activeExplorePage" (click)="scrollExploreTo(i)" aria-label="Ir para página {{i + 1}}"></button>
-        </div>
-      </div>
-    </section>
+    
     
     <!-- Meu saldo section -->
     <section class="meu-saldo-section">
@@ -416,6 +369,55 @@
         </div>
       </div>
     </section>
+    <!-- Explore nossas soluções -->
+    <section class="explore-section">
+      <div class="explore-header">
+        <div class="explore-title-wrapper">
+          <h3 class="explore-title">Explore nossas soluções</h3>
+          <div class="explore-decor"></div>
+        </div>
+      </div>
+
+      <div class="explore-carousel">
+        <div class="explore-track" #exploreContainer>
+          <div class="explore-card">
+            <div class="explore-top explore-yellow"><i class="fas fa-mobile-alt"></i></div>
+            <div class="explore-label explore-yellow-text">Recargas</div>
+          </div>
+
+          <div class="explore-card">
+            <div class="explore-top explore-pink"><i class="fas fa-credit-card"></i></div>
+            <div class="explore-label explore-pink-text">Cartões</div>
+          </div>
+
+          <div class="explore-card">
+            <div class="explore-top explore-purple"><i class="fas fa-search"></i></div>
+            <div class="explore-label explore-purple-text">Consultas</div>
+          </div>
+
+          <div class="explore-card">
+            <div class="explore-top explore-blue"><i class="fas fa-home"></i></div>
+            <div class="explore-label explore-blue-text">Consórcios</div>
+          </div>
+
+          <div class="explore-card">
+            <div class="explore-top explore-orange"><i class="fas fa-shield-alt"></i></div>
+            <div class="explore-label explore-orange-text">Seguros</div>
+          </div>
+
+          <div class="explore-card">
+            <div class="explore-top explore-red"><i class="fas fa-wallet"></i></div>
+            <div class="explore-label explore-red-text">Empréstimos</div>
+          </div>
+        </div>
+
+        <div class="explore-indicators" *ngIf="explorePagesCount > 1">
+          <button class="explore-dot" *ngFor="let p of [].constructor(explorePagesCount); let i = index"
+            [class.active]="i === activeExplorePage" (click)="scrollExploreTo(i)" aria-label="Ir para página {{i + 1}}"></button>
+        </div>
+      </div>
+    </section>
+    
   </main>
 
 
