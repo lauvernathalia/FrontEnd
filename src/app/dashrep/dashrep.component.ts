@@ -1,4 +1,4 @@
-import { Component, AfterViewInit, OnDestroy, ElementRef, ViewChild, Input } from '@angular/core';
+import { Component, AfterViewInit, OnDestroy, ElementRef, ViewChild } from '@angular/core';
 
 @Component({
   selector: 'app-dashboard',
@@ -37,6 +37,36 @@ export class DashrepComponent implements AfterViewInit, OnDestroy {
     { title: 'Valor bruto (R$)', value: '2.540,00', percent: null, trend: null, actionLabel: 'Extrato', actionIcon: 'download' as const },
     { title: 'Valor líquido (R$)', value: '9.500,00', percent: null, trend: null, actionLabel: 'Extrato', actionIcon: 'download' as const }
   ];
+
+  getSalesIntegerPart(value: string): string {
+    return value.split(',')[0] ?? value;
+  }
+
+  getSalesDecimalPart(value: string): string {
+    return value.includes(',') ? (value.split(',')[1] ?? '') : '';
+  }
+
+  getSalesPercentClass(trend: 'up' | 'down' | 'flat' | null): string {
+    return trend ?? '';
+  }
+
+  paymentSegments = [
+    { label: 'Crédito', percent: 60, color: '#355d1a' },
+    { label: 'Débito', percent: 25, color: '#6ea93e' },
+    { label: 'Boleto', percent: 10, color: '#a7d785' },
+    { label: 'Pix', percent: 5, color: '#d5ebc0' }
+  ];
+
+  paymentBrands = [
+    { name: 'Mastercard', value: 'R$ 9.678,89', brandKey: 'mastercard' as const },
+    { name: 'Visa', value: 'R$ 9.678,89', brandKey: 'visa' as const },
+    { name: 'Hipercard', value: 'R$ 9.678,89', brandKey: 'hipercard' as const },
+    { name: 'Outras', value: 'R$ 9.678,89', brandKey: 'other' as const }
+  ];
+
+  get paymentDonutGradient(): string {
+    return 'conic-gradient(#355d1a 0% 60%, #6ea93e 60% 85%, #a7d785 85% 95%, #d5ebc0 95% 100%)';
+  }
 
   isSidebarCollapsed = false;
 isCollapsed = false;

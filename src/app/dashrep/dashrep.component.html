@@ -521,23 +521,280 @@
     </section>
 
     <section class="sales-section" aria-label="Minhas vendas">
-      <app-section-title title="Minhas vendas"></app-section-title>
+      <div class="section-title-row">
+        <h3 class="section-title">Minhas vendas</h3>
+        <span class="section-title-line" aria-hidden="true"></span>
+      </div>
 
       <div class="sales-grid">
-        <app-sales-card
+        <article
           *ngFor="let card of salesCards"
-          [title]="card.title"
-          [value]="card.value"
-          [percent]="card.percent"
-          [trend]="card.trend"
-          [actionLabel]="card.actionLabel"
-          [actionIcon]="card.actionIcon">
-        </app-sales-card>
+          class="sales-card">
+          <p class="sales-label">{{ card.title }}</p>
+
+          <div class="sales-row">
+            <div class="sales-value">
+              <span class="sales-integer">{{ getSalesIntegerPart(card.value) }}</span><span *ngIf="getSalesDecimalPart(card.value)" class="sales-decimal">.{{ getSalesDecimalPart(card.value) }}</span>
+            </div>
+
+            <div *ngIf="card.percent && card.trend" class="sales-percent" [ngClass]="getSalesPercentClass(card.trend)">
+              <svg *ngIf="card.trend === 'up'" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19V5"></path><path d="m5 12 7-7 7 7"></path></svg>
+              <svg *ngIf="card.trend === 'down'" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14"></path><path d="m19 12-7 7-7-7"></path></svg>
+              <svg *ngIf="card.trend === 'flat'" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a9 9 0 1 1-3-6.7"></path><path d="M21 3v5h-5"></path></svg>
+              <span>{{ card.percent }}</span>
+            </div>
+          </div>
+
+          <button type="button" class="sales-action">
+            <span>{{ card.actionLabel }}</span>
+            <svg *ngIf="card.actionIcon === 'download'" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12"></path><path d="m7 10 5 5 5-5"></path><path d="M5 21h14"></path></svg>
+            <svg *ngIf="card.actionIcon === 'arrow-up'" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19V5"></path><path d="m5 12 7-7 7 7"></path></svg>
+          </button>
+        </article>
       </div>
     </section>
 
-    <app-payment-methods-section></app-payment-methods-section>
-    
+    <section class="payment-methods-section" aria-label="Formas de pagamento e por bandeira">
+      <div class="payment-grid">
+        <article class="payment-card">
+          <div class="section-title-row">
+            <h3 class="section-title">Formas de pagamento</h3>
+            <span class="section-title-line" aria-hidden="true"></span>
+          </div>
+
+          <div class="payment-donut-layout">
+            <ul class="payment-legend" aria-label="Legenda das formas de pagamento">
+              <li *ngFor="let segment of paymentSegments" class="payment-legend-item">
+                <span class="legend-dot" [style.backgroundColor]="segment.color" aria-hidden="true"></span>
+                <span>{{ segment.label }}</span>
+              </li>
+            </ul>
+
+            <div class="donut-stage" aria-label="Gráfico donut de formas de pagamento">
+              <div class="donut-chart" [style.background]="paymentDonutGradient" role="img" aria-label="Crédito 60%, Débito 25%, Boleto 10%, Pix 5%"></div>
+              <div class="donut-hole"></div>
+              <div class="donut-badge badge-credit"><span>Crédito</span><strong>60%</strong></div>
+              <div class="donut-badge badge-debit"><span>Débito</span><strong>25%</strong></div>
+            </div>
+          </div>
+        </article>
+
+        <article class="payment-card">
+          <div class="section-title-row">
+            <h3 class="section-title">Por bandeira</h3>
+            <span class="section-title-line" aria-hidden="true"></span>
+          </div>
+
+          <div class="brand-subtitle">
+            <span class="brand-subtitle-icon"><i class="fas fa-flag" aria-hidden="true"></i></span>
+            <span>Vendas por bandeira (R$)</span>
+          </div>
+
+          <div class="brand-list">
+            <div class="brand-item" *ngFor="let brand of paymentBrands">
+              <div class="brand-icon" aria-hidden="true">
+                <ng-container [ngSwitch]="brand.brandKey">
+                  <span *ngSwitchCase="'mastercard'" class="mastercard-mark"><span class="circle circle-left"></span><span class="circle circle-right"></span></span>
+                  <span *ngSwitchCase="'visa'" class="visa-mark">VISA</span>
+                  <span *ngSwitchCase="'hipercard'" class="hipercard-mark">H</span>
+                  <span *ngSwitchDefault class="other-mark"><i class="fas fa-credit-card"></i></span>
+                </ng-container>
+              </div>
+
+              <div class="brand-name">{{ brand.name }}</div>
+              <div class="brand-dots" aria-hidden="true"></div>
+              <div class="brand-value">{{ brand.value }}</div>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="finance-banner-section" aria-label="Banner promocional">
+      <div class="finance-banner">
+        <div class="finance-banner-copy finance-banner-copy-left">
+          <h3>Lorem ipsum dolor sit amet consectetur. Facilisi tincidunt.</h3>
+        </div>
+
+        <div class="finance-banner-copy finance-banner-copy-center">
+          <p>Lorem ipsum dolor sit amet consectetur. Viverra dignissim neque pulvinar aenean sed lacus.</p>
+          <button type="button" class="finance-banner-button">
+            <span>Clique aqui</span>
+            <i class="fas fa-arrow-right" aria-hidden="true"></i>
+          </button>
+        </div>
+
+        <div class="finance-banner-illustration" aria-hidden="true">
+          <svg viewBox="0 0 360 220" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Ilustração financeira com moedas e ferramentas de mineração">
+            <defs>
+              <linearGradient id="bannerCoin" x1="0" x2="1" y1="0" y2="1">
+                <stop offset="0%" stop-color="#ffd56a" />
+                <stop offset="100%" stop-color="#c98617" />
+              </linearGradient>
+              <linearGradient id="bannerGold" x1="0" x2="1" y1="0" y2="1">
+                <stop offset="0%" stop-color="#ffea9d" />
+                <stop offset="100%" stop-color="#d99a1a" />
+              </linearGradient>
+              <linearGradient id="bannerPickaxe" x1="0" x2="0" y1="0" y2="1">
+                <stop offset="0%" stop-color="#aeb7c1" />
+                <stop offset="100%" stop-color="#474f59" />
+              </linearGradient>
+            </defs>
+
+            <ellipse cx="262" cy="198" rx="84" ry="10" fill="rgba(0,0,0,0.18)" />
+
+            <g transform="translate(234 28)">
+              <path d="M10 0L66 18L48 28L0 10Z" fill="url(#bannerPickaxe)" opacity="0.95" />
+              <rect x="31" y="8" width="11" height="120" rx="5.5" transform="rotate(28 31 8)" fill="url(#bannerPickaxe)" />
+              <path d="M62 18L93 0L101 10L70 28Z" fill="#6b737c" />
+            </g>
+
+            <g transform="translate(168 65)">
+              <circle cx="40" cy="40" r="35" fill="url(#bannerCoin)" />
+              <circle cx="40" cy="40" r="25" fill="none" stroke="#fff1b7" stroke-width="3" opacity="0.65" />
+              <text x="40" y="48" text-anchor="middle" font-size="32" font-family="Arial, Helvetica, sans-serif" font-weight="700" fill="#fff6d6">₿</text>
+            </g>
+
+            <g transform="translate(92 98)">
+              <ellipse cx="36" cy="72" rx="20" ry="10" fill="#8d5e17" opacity="0.28" />
+              <rect x="18" y="26" width="36" height="44" rx="6" fill="#ffe2a0" stroke="#d89a1d" stroke-width="2" />
+              <path d="M21 34h30M21 44h30M21 54h30" stroke="#d89a1d" stroke-width="2" stroke-linecap="round" />
+              <circle cx="36" cy="18" r="12" fill="url(#bannerGold)" />
+              <text x="36" y="23" text-anchor="middle" font-size="16" font-family="Arial, Helvetica, sans-serif" font-weight="700" fill="#8c5f10">₿</text>
+            </g>
+
+            <g transform="translate(248 116)">
+              <ellipse cx="36" cy="72" rx="28" ry="10" fill="#8d5e17" opacity="0.22" />
+              <circle cx="36" cy="44" r="30" fill="url(#bannerCoin)" />
+              <circle cx="36" cy="44" r="19" fill="none" stroke="#fff1b7" stroke-width="3" opacity="0.55" />
+              <text x="36" y="51" text-anchor="middle" font-size="28" font-family="Arial, Helvetica, sans-serif" font-weight="700" fill="#fff6d6">M</text>
+            </g>
+
+            <g transform="translate(296 146)">
+              <rect x="0" y="26" width="48" height="14" rx="6" fill="#d3a230" />
+              <rect x="4" y="12" width="48" height="14" rx="6" fill="#e8be44" />
+              <rect x="8" y="0" width="48" height="14" rx="6" fill="#ffd77d" />
+            </g>
+
+            <g transform="translate(120 150)">
+              <rect x="0" y="26" width="38" height="48" rx="6" fill="#1e242b" />
+              <rect x="10" y="0" width="18" height="30" rx="3" fill="#1e242b" />
+              <path d="M18 30h2M8 20h22" stroke="#77d36f" stroke-width="3" stroke-linecap="round" />
+              <path d="M28 30h2" stroke="#d64b4b" stroke-width="3" stroke-linecap="round" />
+              <circle cx="19" cy="48" r="12" fill="#f3d07b" opacity="0.9" />
+              <path d="M15 44h8M15 48h8M15 52h8" stroke="#9f7312" stroke-width="2" stroke-linecap="round" />
+            </g>
+          </svg>
+        </div>
+      </div>
+    </section>
+
+    <section class="latest-sales-section" aria-label="Últimas vendas">
+      <div class="section-title-row latest-sales-title-row">
+        <h3 class="section-title latest-sales-title">Últimas vendas</h3>
+        <span class="section-title-line latest-sales-line" aria-hidden="true"></span>
+      </div>
+
+      <article class="latest-sales-card">
+        <div class="latest-sales-table" role="table" aria-label="Últimas vendas">
+          <div class="latest-sales-row latest-sales-head" role="row">
+            <div class="latest-sales-cell latest-sales-head-cell" role="columnheader"><span>Data</span><i class="fas fa-chevron-down" aria-hidden="true"></i></div>
+            <div class="latest-sales-cell latest-sales-head-cell" role="columnheader"><span>Método</span><i class="fas fa-chevron-down" aria-hidden="true"></i></div>
+            <div class="latest-sales-cell latest-sales-head-cell" role="columnheader"><span>Portador</span><i class="fas fa-chevron-down" aria-hidden="true"></i></div>
+            <div class="latest-sales-cell latest-sales-head-cell latest-sales-head-cell--value" role="columnheader"><span>Valor (R$)</span><i class="fas fa-chevron-down" aria-hidden="true"></i></div>
+          </div>
+
+          <div class="latest-sales-row" role="row">
+            <div class="latest-sales-cell" role="cell">21/09/2023 às 15:45h</div>
+            <div class="latest-sales-cell" role="cell">Visa (Final 6766)</div>
+            <div class="latest-sales-cell" role="cell">Heloisa Pereira</div>
+            <div class="latest-sales-cell latest-sales-cell--value" role="cell">5.000,00</div>
+          </div>
+
+          <div class="latest-sales-row" role="row">
+            <div class="latest-sales-cell" role="cell">21/09/2023 às 15:45h</div>
+            <div class="latest-sales-cell" role="cell">Mastercard (Final 6766)</div>
+            <div class="latest-sales-cell" role="cell">José de Bragança Neto</div>
+            <div class="latest-sales-cell latest-sales-cell--value" role="cell">100.000,00</div>
+          </div>
+
+          <div class="latest-sales-row" role="row">
+            <div class="latest-sales-cell" role="cell">21/09/2023 às 15:45h</div>
+            <div class="latest-sales-cell" role="cell">Mastercard (Final 6766)</div>
+            <div class="latest-sales-cell" role="cell">Raul Souza Pereira de Oliveira</div>
+            <div class="latest-sales-cell latest-sales-cell--value" role="cell">560.888,89</div>
+          </div>
+
+          <div class="latest-sales-row" role="row">
+            <div class="latest-sales-cell" role="cell">21/09/2023 às 15:45h</div>
+            <div class="latest-sales-cell" role="cell">Mastercard (Final 6766)</div>
+            <div class="latest-sales-cell" role="cell">Raul Souza Pereira de Oliveira</div>
+            <div class="latest-sales-cell latest-sales-cell--value" role="cell">10.560.888,89</div>
+          </div>
+
+          <div class="latest-sales-row latest-sales-row--last" role="row">
+            <div class="latest-sales-cell" role="cell">21/09/2023 às 15:45h</div>
+            <div class="latest-sales-cell" role="cell">Mastercard (Final 6766)</div>
+            <div class="latest-sales-cell" role="cell">Raul Souza Pereira de Oliveira</div>
+            <div class="latest-sales-cell latest-sales-cell--value" role="cell">100.000,00</div>
+          </div>
+        </div>
+      </article>
+    </section>
+
+    <section class="latest-sales-section" aria-label="Extrato resumido">
+      <div class="section-title-row latest-sales-title-row">
+        <h3 class="section-title latest-sales-title">Extrato resumido</h3>
+        <span class="section-title-line latest-sales-line" aria-hidden="true"></span>
+      </div>
+
+      <article class="latest-sales-card">
+        <div class="latest-sales-table" role="table" aria-label="Extrato resumido">
+          <div class="latest-sales-row latest-sales-head" role="row">
+            <div class="latest-sales-cell latest-sales-head-cell" role="columnheader"><span>Data</span><i class="fas fa-chevron-down" aria-hidden="true"></i></div>
+            <div class="latest-sales-cell latest-sales-head-cell" role="columnheader"><span>Método</span><i class="fas fa-chevron-down" aria-hidden="true"></i></div>
+            <div class="latest-sales-cell latest-sales-head-cell" role="columnheader"><span>Portador</span><i class="fas fa-chevron-down" aria-hidden="true"></i></div>
+            <div class="latest-sales-cell latest-sales-head-cell latest-sales-head-cell--value" role="columnheader"><span>Valor (R$)</span><i class="fas fa-chevron-down" aria-hidden="true"></i></div>
+          </div>
+
+          <div class="latest-sales-row" role="row">
+            <div class="latest-sales-cell" role="cell">21/09/2023 às 15:45h</div>
+            <div class="latest-sales-cell" role="cell">Visa (Final 6766)</div>
+            <div class="latest-sales-cell" role="cell">Heloisa Pereira</div>
+            <div class="latest-sales-cell latest-sales-cell--value" role="cell">5.000,00</div>
+          </div>
+
+          <div class="latest-sales-row" role="row">
+            <div class="latest-sales-cell" role="cell">21/09/2023 às 15:45h</div>
+            <div class="latest-sales-cell" role="cell">Mastercard (Final 6766)</div>
+            <div class="latest-sales-cell" role="cell">José de Bragança Neto</div>
+            <div class="latest-sales-cell latest-sales-cell--value" role="cell">100.000,00</div>
+          </div>
+
+          <div class="latest-sales-row" role="row">
+            <div class="latest-sales-cell" role="cell">21/09/2023 às 15:45h</div>
+            <div class="latest-sales-cell" role="cell">Mastercard (Final 6766)</div>
+            <div class="latest-sales-cell" role="cell">Raul Souza Pereira de Oliveira</div>
+            <div class="latest-sales-cell latest-sales-cell--value" role="cell">560.888,89</div>
+          </div>
+
+          <div class="latest-sales-row" role="row">
+            <div class="latest-sales-cell" role="cell">21/09/2023 às 15:45h</div>
+            <div class="latest-sales-cell" role="cell">Mastercard (Final 6766)</div>
+            <div class="latest-sales-cell" role="cell">Raul Souza Pereira de Oliveira</div>
+            <div class="latest-sales-cell latest-sales-cell--value" role="cell">10.560.888,89</div>
+          </div>
+
+          <div class="latest-sales-row latest-sales-row--last" role="row">
+            <div class="latest-sales-cell" role="cell">21/09/2023 às 15:45h</div>
+            <div class="latest-sales-cell" role="cell">Mastercard (Final 6766)</div>
+            <div class="latest-sales-cell" role="cell">Raul Souza Pereira de Oliveira</div>
+            <div class="latest-sales-cell latest-sales-cell--value" role="cell">100.000,00</div>
+          </div>
+        </div>
+      </article>
+    </section>
+
   </main>
 
 </div>
