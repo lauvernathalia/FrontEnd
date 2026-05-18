@@ -1,0 +1,387 @@
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="con_pagamento_vendas.aspx.cs" Inherits="con_pagamento_vendas" %>
+
+<%@ Register TagPrefix="Portal" TagName="PageBottom" Src="rodapepadrao.ascx" %>
+<%@ Register TagPrefix="Portal" TagName="PageLeft" Src="menupadrao.ascx" %>
+<%@ Register TagPrefix="Portal" TagName="PageHeader" Src="topopadrao.ascx" %>
+<%@ Register TagPrefix="Portal" TagName="PageRotina" Src="rotinaspadroes.ascx" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head id="Head1" runat="server">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+    <title>LEGACYBANK</title>
+    <link rel="icon" type="image/x-icon" href="../images/favicon-96x96.png">
+
+    <PORTAL:PAGEROTINA id="PageRotina1" title="Site Directory" runat="server" ModuleSource="rotinaspadroes.ascx"></PORTAL:PAGEROTINA>
+    <link rel="stylesheet" href="../plugins/fullcalendar/main.min.css"/>
+    <link rel="stylesheet" href="../plugins/fullcalendar-daygrid/main.min.css"/>
+    <link rel="stylesheet" href="../plugins/fullcalendar-timegrid/main.min.css"/>
+    <link rel="stylesheet" href="../plugins/fullcalendar-bootstrap/main.min.css"/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+<style>
+.modal { overflow-y: auto; }
+</style>
+
+</head>
+<body class="hold-transition sidebar-mini layout-fixed">
+    <form id="frmPrincipal" runat="server">
+
+        <div class="wrapper">
+            <PORTAL:PAGEHEADER id="PageHeader1" title="Site Directory" runat="server" ModuleSource="topopadrao.ascx"></PORTAL:PAGEHEADER>
+            <PORTAL:PAGELEFT id="Pageheader2" title="Site Directory" runat="server" ModuleSource="menupadrao.ascx"></PORTAL:PAGELEFT>
+
+            <div class="content-wrapper">
+
+
+                <section class="content">
+                    <div class="container-fluid" >
+
+                        <div class="row mb-2">
+                          <div class="col-sm-12">
+                            <ol class="breadcrumb">
+                              <li class="breadcrumb-item"><a href="#">Minhas Vendas</a></li>
+                              <li class="breadcrumb-item active">Pagamentos de Vendas</li>
+                            </ol>
+                          </div>
+                        </div>
+
+                        <div class="row">
+                          <div class="col-12">
+
+                            <div class="card">
+
+                              <div class="card-header bg-whitelabel1">
+                                <h3 class="card-title">Campos de Pesquisa</h3>
+                              </div>
+                              <div class="card-body">
+
+                                <div class="form-group row col-12">
+                                    <label class="col-2 col-form-label">Estabelecimento</label>
+						            <div class="col-10">
+                                        <asp:DropDownList runat="server" id="ddlEstabelecimento" CssClass="form-control" >
+                                        </asp:DropDownList>
+                                    </div>
+                                </div>
+
+
+                                <div class="form-group row col-12">
+                                    <label class="col-2 col-form-label">Data Início</label>
+						            <div class="col-2">
+                                        <div class="input-group date" id="datepickerIni" data-target-input="nearest">
+								            <asp:TextBox ID="txtDataIni" runat="server" CssClass="form-control datetimepicker-input" data-target="#datepickerIni"></asp:TextBox>
+                                            <div class="input-group-append" data-target="#datepickerIni" data-toggle="datetimepicker">
+                                                <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <label class="col-2 col-form-label">Data Fim</label>
+						            <div class="col-2">
+                                        <div class="input-group date" id="datepickerFim" data-target-input="nearest">
+								            <asp:TextBox ID="txtDataFim" runat="server" CssClass="form-control datetimepicker-input" data-target="#datepickerFim"></asp:TextBox>
+                                            <div class="input-group-append" data-target="#datepickerFim" data-toggle="datetimepicker">
+                                                <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                              </div>
+
+                              <div class="card-footer">
+                                <asp:Button runat="server" ID="btnPesquisar" CssClass="btn btn-whitelabel1 col-2" Text="Pesquisar" onclick="btnPesquisar_Click"/>
+                                <asp:Button CssClass="btn btn-whitelabel1 col-2 float-right" runat="server" id="btnExportar" Text="Exportar Excel" onclick="btnExportar_Click" />
+                                
+                                <asp:Button ID="btnPostback" runat="server" Visible="false" OnClick="btnPostBack_Click" />
+                                <script type="text/javascript">
+                                    function PostBackOnMainPage(){
+                                    <%=GetPostBackScript()%>
+                                    }
+                                </script>
+                              </div>
+
+                              </div>
+
+                            </div>
+                          </div>
+                          <div class="row">
+                            <div class="col-12">
+                                <div class="card">
+
+                                  <div class="card-header bg-whitelabel1">
+                                    <h3 class="card-title">Pagamento de Vendas</h3>
+                                  </div>
+                                  <div class="card-body" style="overflow:auto; width: 100%;>
+                                    <div class="row">
+                                        <div class="col-12">
+
+                                            <table id="tblConsulta" class="table table-striped dt-responsive nowrap">
+                                                <thead>
+                                                <tr>
+                                                  <th>Data da Criação</th>
+                                                  <th>Data da Atualização</th>
+                                                  <th>Status</th>
+                                                  <th>Favorecido</th>
+                                                  <th>Tipo</th>
+                                                  <th>Meio</th>
+                                                  <th>Valor do Lançamento</th>
+                                                  <th>Detalhe</th>
+
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                <asp:Repeater runat="server" ID="rptConsulta" 
+                                                        OnItemCommand="rptConsulta_OnItemCommand" 
+                                                        onitemdatabound="rptConsulta_ItemDataBound">
+                                                    <ItemTemplate>
+
+                                                        <tr>
+                                                          <td>
+                                                            <small><%# String.Format("{0:dd/MM/yyyy HH:mm}",DataBinder.Eval(Container.DataItem, "DTA_CRIADO"))%></small>
+                                                          </td>
+                                                          <td>
+                                                            <small><%# String.Format("{0:dd/MM/yyyy HH:mm}",DataBinder.Eval(Container.DataItem, "DTA_ATUALIZADO"))%></small>
+                                                          </td>
+
+                                                          <td>
+                                                            <small class='text-<%# DataBinder.Eval(Container.DataItem, "NOM_FLG_STATUS_COR")%>'><%# DataBinder.Eval(Container.DataItem, "NOM_FLG_STATUS")%></small>
+                                                          </td>
+                                                          <td>
+                                                            <small><%# DataBinder.Eval(Container.DataItem, "NOM_TITULAR_BANCO")%></small>
+                                                          </td>
+
+                                                          <td>
+                                                            <small><%# DataBinder.Eval(Container.DataItem, "NOM_FLG_TIPO")%></small>
+                                                          </td>
+
+
+                                                          <td>
+                                                            <small><%# DataBinder.Eval(Container.DataItem, "NOM_BANCO")%></small><br />
+                                                            <small>Ag.:<%# DataBinder.Eval(Container.DataItem, "NOM_AGENCIA_BANCO")%> Conta:<%# DataBinder.Eval(Container.DataItem, "NOM_CONTA_BANCO")%></small></td>
+
+                                                          <td>
+                                                            <small><%# String.Format("{0:n2}",DataBinder.Eval(Container.DataItem, "NUM_VALOR"))%></small>
+                                                          </td>
+                                                          <td>
+
+                                                            <a data-toggle="modal" href='#modal-<%# DataBinder.Eval(Container.DataItem, "FLG_RECURSO")%><%# DataBinder.Eval(Container.DataItem, "COD_ID")%>' data-backdrop="static">                                                                
+                                                                <i class="fas fa-chevron-right float-right"></i>
+                                                            </a>
+
+                                                            <div class="modal" id="modal-transfer<%# DataBinder.Eval(Container.DataItem, "COD_ID")%>" data-backdrop="static">
+                                                                <div class="modal-dialog">
+                                                                    <div class="modal-content">
+                                                                        <div class="container"></div>
+                                                                        <div class="modal-body text-black">
+                                                                            <center>
+                                                                            <asp:TextBox runat="server" ID="txtid" Text='<%# DataBinder.Eval(Container.DataItem, "COD_ID")%>' Visible="false"></asp:TextBox>
+                                                                            <asp:TextBox runat="server" ID="txtidtransferencia" Text='<%# DataBinder.Eval(Container.DataItem, "NOM_OBJECT_ID")%>' Visible="false"></asp:TextBox>
+                                                                            <h3 class="modal-title text-black"><b class="text-whitelabel1">DETALHE</b> DA TRANSFERÊNCIA</h3>
+                                                                            <h6>Criada em <%# DataBinder.Eval(Container.DataItem, "DTA_CRIADO")%></h6>
+                                                                            </center>
+                                                                            <hr>
+                                                                            <h4 class='text-<%# DataBinder.Eval(Container.DataItem, "NOM_FLG_STATUS_COR")%>'><%# DataBinder.Eval(Container.DataItem, "NOM_FLG_STATUS")%></h4>
+                                                                            <h6><b>Valor da Transferência</b></h6>
+                                                                            <h4>R$ <%# String.Format("{0:n2}",DataBinder.Eval(Container.DataItem, "NUM_VALOR"))%></h4>
+                                                                            <h6><b>Tipo</b></h6>
+                                                                            <h6><%# DataBinder.Eval(Container.DataItem, "NOM_FLG_RECURSO")%> <%# DataBinder.Eval(Container.DataItem, "NOM_FLG_TIPO")%></h6>
+                                                                            <h6><b>Descrição</b></h6>
+                                                                            <h6><%# DataBinder.Eval(Container.DataItem, "DES_DESCRICAO")%></h6>
+                                                                            <h6><b>ID da Transferência</b></h6>
+                                                                            <h6><%# DataBinder.Eval(Container.DataItem, "NOM_OBJECT_ID")%></h6>
+                                                                            <h6><b>URI</b></h6>
+                                                                            <h6><%# DataBinder.Eval(Container.DataItem, "NOM_URI").ToString().Substring(1,30)%></h6>
+                                                                            <hr />
+
+                                                                            <h4><b class="text-whitelabel1">Dados</b> do Favorecido</h4>
+                                                                            <h6><b>Nome do Titular</b></h6>
+                                                                            <h6><%# DataBinder.Eval(Container.DataItem, "NOM_TITULAR_BANCO")%></h6>
+                                                                            <h6><b>CNPJ/CPF</b></h6>
+                                                                            <h6><%# DataBinder.Eval(Container.DataItem, "NOM_CNPJCPF")%></h6>
+                                                                            <h6><b>Banco</b></h6>
+                                                                            <h6><%# DataBinder.Eval(Container.DataItem, "NOM_BANCO")%></h6>
+                                                                            <h6><b>Agência</b></h6>
+                                                                            <h6><%# DataBinder.Eval(Container.DataItem, "NOM_AGENCIA_BANCO")%></h6>
+                                                                            <h6><b>Conta</b></h6>
+                                                                            <h6><%# DataBinder.Eval(Container.DataItem, "NOM_CONTA_BANCO")%></h6>
+                                                                            <hr />
+
+                                                                            <a data-toggle="modal" href="#modal-transacoes<%# DataBinder.Eval(Container.DataItem, "COD_ID")%>" data-backdrop="static" class="btn btn-sm btn-whitelabel1">Exibir Transações</a>
+
+                                                                        </div>
+                                                                        <div class="modal-footer">
+                                                                            <a href="#" data-dismiss="modal" class="btn btn-whitelabel1 btn-sm">Fechar</a>
+                                                                        </div>
+
+
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="modal" id="modal-transacoes<%# DataBinder.Eval(Container.DataItem, "COD_ID")%>" data-backdrop="static">
+                                                                <div class="modal-dialog">
+                                                                    <div class="modal-content">
+                                                                    <div class="container"></div>
+                                                                    <div class="modal-body">
+                                                                            
+                                                                        <h4><b class="text-whitelabel1">Extrato</b> da Transferência</h4>
+                                                                        <h6>O valor total dessa transferência é composto por uma série de operações, aqui você pode conferir o detalhamento referente ao valor transferido.</h6>
+                                                                        <h6 class="float-right"><asp:Label runat="server" ID="lblOperacoes" Text="0"></asp:Label> operações</h6><br />
+
+                                                                        <div class="row">
+                                                                            <div class="col-sm-8">
+                                                                                <h6><%# DataBinder.Eval(Container.DataItem, "DTA_CRIADO")%></h6>
+                                                                                <h6><%# DataBinder.Eval(Container.DataItem, "NOM_FLG_RECURSO")%> <%# DataBinder.Eval(Container.DataItem, "NOM_FLG_TIPO")%></h6>
+                                                                                <h6><%# DataBinder.Eval(Container.DataItem, "DES_DESCRICAO")%>)</h6>
+                                                                            </div>
+                                                                            <div class="col-sm-4">
+                                                                                <h4>R$ <%# String.Format("{0:n2}",DataBinder.Eval(Container.DataItem, "NUM_VALOR"))%></h4>
+                                                                            </div>
+                                                                        </div>
+                                                                        <hr />
+                                                                        <h4 class="text-whitelabel1 text-center">TRANSAÇÕES</h4>
+                                                                        <hr />
+
+
+                                                                        <asp:Repeater runat="server" ID="rptTransacoes">
+                                                                            <ItemTemplate>
+                                                                                <div class="row">
+                                                                                    <div class="col-11">
+                                                                                        <%# String.Format("{0:dd/MM/yyyy HH:mm}",DataBinder.Eval(Container.DataItem, "data"))%><br />
+                                                                                        <%# DataBinder.Eval(Container.DataItem, "id")%><br />
+                                                                                        <%# DataBinder.Eval(Container.DataItem, "tipo")%><br />
+                                                                                        <%# String.Format("{0:c2}",DataBinder.Eval(Container.DataItem, "Valor"))%><br />
+                                                                                    </div>
+                                                                                    <div class="col-1">
+                                                                                        <h2 class="text-whitelabel1">
+                                                                                            <b><a data-toggle="modal" href="#modal-transacoesdetalhe<%# DataBinder.Eval(Container.DataItem, "id")%>" data-backdrop="static">></a></b>
+                                                                                            <div class="modal" id="modal-transacoesdetalhe<%# DataBinder.Eval(Container.DataItem, "id")%>" data-backdrop="static">
+                                                                                                <div class="modal-dialog">
+                                                                                                    <div class="modal-content">
+                                                                                                        <div class="container"></div>
+                                                                                                        <div class="modal-body">
+                                                                                                        </div>
+                                                                                                        <div class="modal-footer">
+                                                                                                            <a href="#" data-dismiss="modal" class="btn btn-whitelabel1 btn-sm">Fechar</a>
+                                                                                                        </div>
+
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                        </h2>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <hr />
+
+
+
+                                                                            </ItemTemplate>
+                                                                        </asp:Repeater>
+                                                                          
+                                                                    </div>
+                                                                    <div class="modal-footer">
+                                                                        <a href="#" data-dismiss="modal" class="btn  btn-whitelabel1 btn-sm">Fechar</a>
+                                                                    </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                            <!-- FORA DO MODAL -->
+                                                          
+                                                          
+                                                          
+                                                          </td>
+                                                        </tr>
+                                                    </ItemTemplate>
+                                                </asp:Repeater>
+
+                                                </tbody>
+                                            </table>
+
+                                        
+                                        </div>
+                                    </div>
+                                  </div>
+                                </div>
+                            
+                            
+                            </div>
+                          </div>
+
+
+                        </div>
+
+                </section>
+            </div>
+            <PORTAL:PAGEBOTTOM id="Pageheader3" title="Site Directory" runat="server" ModuleSource="rodapepadrao.ascx"></PORTAL:PAGEBOTTOM><!-- Fim Rodapé da Pagina -->
+    
+        </div>
+    </form>
+
+<script src="../plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="../plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+<script src="../plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+<script src="../plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+<script src="../plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
+<script src="../plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
+<script src="../plugins/jszip/jszip.min.js"></script>
+<script src="../plugins/pdfmake/pdfmake.min.js"></script>
+<script src="../plugins/pdfmake/vfs_fonts.js"></script>
+<script src="../plugins/datatables-buttons/js/buttons.html5.min.js"></script>
+<script src="../plugins/datatables-buttons/js/buttons.print.min.js"></script>
+<script src="../plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
+
+<script type="text/javascript">
+
+    $(function () {
+
+        //Date range picker
+        $('#datepickerIni').datetimepicker({
+            format: 'DD/MM/YYYY'
+        });
+        $('#datepickerFim').datetimepicker({
+            format: 'DD/MM/YYYY'
+        });
+    })
+</script>        
+
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        var table = $('#tblConsulta').DataTable({
+            order: [[0, 'desc']],
+            "responsive": false,
+            "sPaginationType": "full_numbers",
+            "oLanguage": {
+                "sUrl": '//cdn.datatables.net/plug-ins/2.0.6/i18n/pt-BR.json'
+            },
+
+            "paging": true,
+            "lengthChange": false,
+            "searching": true,
+            "ordering": true,
+            "info": false,
+            "autoWidth": false,
+            buttons: ['copy', 'excel', 'pdf', 'csv', 'print'],
+            initComplete: function () {
+                this.api().buttons().container()
+                //.appendTo( $ ('#table_id_wrapper .col-md-6:eq(0)', this.api().table (). container ()));
+                //.appendTo( $('#table_id_wrapper .col-md-6:eq(0)' ) );
+            .appendTo($('.col-md-6:eq(0)', this.api().table().container()));
+
+            }
+
+        });
+
+    });
+
+</script>   
+
+
+</body>
+</html>
+
